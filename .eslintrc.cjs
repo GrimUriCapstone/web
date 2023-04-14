@@ -6,6 +6,7 @@ module.exports = {
   extends: [
     "plugin:react/recommended",
     "standard-with-typescript",
+    "plugin:tailwindcss/recommended",
     "plugin:prettier/recommended",
   ],
   overrides: [],
@@ -17,5 +18,7 @@ module.exports = {
   plugins: ["react", "prettier"],
   rules: {
     "react/react-in-jsx-scope": 0,
+    "tailwindcss/no-custom-classname": 0,
+    "@typescript-eslint/no-floating-promises": 0,
   },
 };
