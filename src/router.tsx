@@ -1,4 +1,4 @@
-import { AUTH_PAGE_PATH, SETTINGS_PAGE_PATH } from "@constants/paths";
+import { AUTH_PAGE_PATH, SETTINGS_PAGE_PATH } from "@domain/constants/paths";
 import { ProtectedRoute } from "@presentation/ProtectedRoute";
 import { AuthPage } from "@presentation/pages/AuthPage";
 import { MainPage } from "@presentation/pages/MainPage";

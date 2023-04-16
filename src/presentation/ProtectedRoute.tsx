@@ -1,4 +1,4 @@
-import { AUTH_PAGE_PATH } from "@constants/paths";
+import { AUTH_PAGE_PATH } from "@domain/constants/paths";
 import { useAuthStore } from "@stores/authStore";
 import { useEffect, type ReactElement, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";

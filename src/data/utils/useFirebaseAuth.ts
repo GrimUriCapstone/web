@@ -1,10 +1,11 @@
+import { type User } from "@domain/models/user";
 import {
   GoogleAuthProvider,
   getAuth,
   signInWithRedirect,
   browserLocalPersistence,
   setPersistence,
-  type User,
+  type User as FirebaseUser,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 
@@ -24,11 +25,12 @@ export const useFirebaseAuth = (): UseFirebaseReturns => {
   const auth = getAuth();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user != null) {
-        setUser(user);
-        updateInfo();
-        setIsLoading(false);
+    const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser != null) {
+        setUser({ username: "text", email: "12", nickname: "12" });
+        updateInfo(firebaseUser).then(() => {
+          setIsLoading(false);
+        });
       } else {
         setUser(null);
         setIsLoading(false);
@@ -39,10 +41,11 @@ export const useFirebaseAuth = (): UseFirebaseReturns => {
       unsubscribe();
     };
   }, []);
-  const updateInfo = async (): Promise<void> => {
-    if (user != null) {
-      const token = await user.getIdToken();
+  const updateInfo = async (firebaseUser: FirebaseUser): Promise<void> => {
+    if (firebaseUser != null) {
+      const token = await firebaseUser.getIdToken();
       setAccessToken(token);
+      console.log(token);
     }
   };
   const login = async (): Promise<void> => {

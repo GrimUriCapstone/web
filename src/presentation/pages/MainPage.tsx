@@ -1,4 +1,4 @@
-import { SETTINGS_PAGE_PATH } from "@constants/paths";
+import { SETTINGS_PAGE_PATH } from "@domain/constants/paths";
 import { CogIcon, NotificationIcon } from "@presentation/atomics/Icons";
 import { BottonNavigationBar } from "@presentation/components/BottomNavigationBar";
 import { type ReactElement } from "react";

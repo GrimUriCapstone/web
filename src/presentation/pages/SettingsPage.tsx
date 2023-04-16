@@ -1,5 +1,6 @@
+import { useFirebaseAuth } from "@data/utils/useFirebaseAuth";
 import { TopBar } from "@presentation/components/TopBar";
-import { useFirebaseAuth } from "@utils/useFirebaseAuth";
+
 import { type ReactElement } from "react";
 
 function AuthSetting(): ReactElement {

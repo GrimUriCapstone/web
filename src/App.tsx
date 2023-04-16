@@ -1,7 +1,7 @@
 import { router } from "@router";
-import { useFirebase } from "@utils/useFirebase";
+import { useFirebase } from "@data/utils/useFirebase";
 
-import { useEffect, type ReactElement } from "react";
+import { type ReactElement } from "react";
 import { RouterProvider } from "react-router-dom";
 export function App(): ReactElement {
   useFirebase();

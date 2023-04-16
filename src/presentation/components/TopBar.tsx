@@ -1,4 +1,4 @@
-import { HOME_PAGE_PATH } from "@constants/paths";
+import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { ArrowLongIcon } from "@presentation/atomics/Icons";
 import { type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
