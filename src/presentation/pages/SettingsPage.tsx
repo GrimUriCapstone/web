@@ -1,25 +1,15 @@
-import { useFirebaseAuth } from "@data/utils/useFirebaseAuth";
-import { useUser } from "@data/utils/useUser";
+import { signInWithGoogle, signOut, useAuthStore } from "@data/utils/useAuth";
 import { TopBar } from "@presentation/components/TopBar";
-
 import { type ReactElement } from "react";
 
 function AuthSetting(): ReactElement {
-  const { login, accessToken, signOut, isLoading } = useFirebaseAuth();
-  const { user } = useUser();
-  if (isLoading) {
-    return (
-      <button className="btn btn-block">
-        <progress className="progress progress-primary w-10" />
-      </button>
-    );
-  }
+  const accessToken = useAuthStore((state) => state.accessToken);
   return (
     <div>
       {accessToken == null ? (
         <button
           onClick={() => {
-            login();
+            signInWithGoogle();
           }}
           className="btn btn-block"
         >

@@ -21,5 +21,6 @@ module.exports = {
     "tailwindcss/no-custom-classname": 0,
     "@typescript-eslint/no-floating-promises": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
+    "@typescript-eslint/no-misused-promises": 0,
   },
 };
