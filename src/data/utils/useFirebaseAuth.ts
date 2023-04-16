@@ -1,4 +1,3 @@
-import { type User } from "@domain/models/user";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -9,16 +8,17 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 
-interface UseFirebaseReturns {
+interface FirebaseAuth {
   login: () => Promise<void>;
-  user: Nullable<User>;
   isLoading: boolean;
   accessToken: Nullable<string>;
   signOut: () => Promise<void>;
+  updateAccessToken: () => Promise<void>;
 }
 
-export const useFirebaseAuth = (): UseFirebaseReturns => {
-  const [user, setUser] = useState<Nullable<User>>(null);
+export const useFirebaseAuth = (): FirebaseAuth => {
+  const [firebaseUser, setFirebaseUser] =
+    useState<Nullable<FirebaseUser>>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [accessToken, setAccessToken] = useState<Nullable<string>>(null);
   const provider = new GoogleAuthProvider();
@@ -27,12 +27,12 @@ export const useFirebaseAuth = (): UseFirebaseReturns => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
       if (firebaseUser != null) {
-        setUser({ username: "text", email: "12", nickname: "12" });
-        updateInfo(firebaseUser).then(() => {
+        setFirebaseUser(firebaseUser);
+        updateAccessToken().then(() => {
           setIsLoading(false);
         });
       } else {
-        setUser(null);
+        setFirebaseUser(null);
         setIsLoading(false);
       }
     });
@@ -41,13 +41,13 @@ export const useFirebaseAuth = (): UseFirebaseReturns => {
       unsubscribe();
     };
   }, []);
-  const updateInfo = async (firebaseUser: FirebaseUser): Promise<void> => {
+  const updateAccessToken = async (): Promise<void> => {
     if (firebaseUser != null) {
       const token = await firebaseUser.getIdToken();
       setAccessToken(token);
-      console.log(token);
     }
   };
+
   const login = async (): Promise<void> => {
     setIsLoading(true);
     await setPersistence(auth, browserLocalPersistence);
@@ -58,7 +58,6 @@ export const useFirebaseAuth = (): UseFirebaseReturns => {
   const signOut = async (): Promise<void> => {
     auth.signOut();
     setAccessToken(null);
-    setUser(null);
   };
-  return { login, user, isLoading, accessToken, signOut };
+  return { login, isLoading, accessToken, signOut, updateAccessToken };
 };

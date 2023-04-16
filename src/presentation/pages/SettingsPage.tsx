@@ -1,11 +1,12 @@
 import { useFirebaseAuth } from "@data/utils/useFirebaseAuth";
+import { useUser } from "@data/utils/useUser";
 import { TopBar } from "@presentation/components/TopBar";
 
 import { type ReactElement } from "react";
 
 function AuthSetting(): ReactElement {
-  const { user, login, accessToken, signOut, isLoading } = useFirebaseAuth();
-
+  const { login, accessToken, signOut, isLoading } = useFirebaseAuth();
+  const { user } = useUser();
   if (isLoading) {
     return (
       <button className="btn btn-block">
@@ -15,7 +16,7 @@ function AuthSetting(): ReactElement {
   }
   return (
     <div>
-      {user == null ? (
+      {accessToken == null ? (
         <button
           onClick={() => {
             login();
