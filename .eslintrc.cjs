@@ -20,5 +20,6 @@ module.exports = {
     "react/react-in-jsx-scope": 0,
     "tailwindcss/no-custom-classname": 0,
     "@typescript-eslint/no-floating-promises": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
   },
 };

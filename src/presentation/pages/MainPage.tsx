@@ -1,6 +1,8 @@
-import { NotificationIcon } from "@presentation/atomics/Icons";
+import { SETTINGS_PAGE_PATH } from "@constants/paths";
+import { CogIcon, NotificationIcon } from "@presentation/atomics/Icons";
 import { BottonNavigationBar } from "@presentation/components/BottomNavigationBar";
 import { type ReactElement } from "react";
+import { Link } from "react-router-dom";
 
 export function MainPage(): ReactElement {
   return (
@@ -17,6 +19,11 @@ export function MainPage(): ReactElement {
               <span className="badge badge-xs badge-primary indicator-item"></span>
             </div>
           </button>
+          <Link to={SETTINGS_PAGE_PATH}>
+            <button className="btn btn-ghost btn-circle">
+              <CogIcon />
+            </button>
+          </Link>
         </div>
       </div>
       <BottonNavigationBar activeIdx={0} />

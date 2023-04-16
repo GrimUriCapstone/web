@@ -3,23 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { HOME_PAGE_PATH } from "@constants/paths";
 import { useFirebaseAuth } from "@utils/useFirebaseAuth";
 export function AuthPage(): ReactElement {
-  const { login, credential, isLoading } = useFirebaseAuth();
+  const { login, user, isLoading } = useFirebaseAuth();
   const navigate = useNavigate();
   useEffect(() => {
-    if (credential == null) return;
+    if (isLoading) {
+      return;
+    }
+    if (user == null) {
+      login();
+      return;
+    }
     navigate(HOME_PAGE_PATH);
-  }, [credential]);
+  }, [user, isLoading]);
   return (
     <div>
-      <p>{credential?.accessToken}</p>
-      <button
-        className={isLoading ? "btn btn-disabled" : "btn btn-primary"}
-        onClick={() => {
-          login();
-        }}
-      >
-        login
-      </button>
+      <progress className="progress w-56"></progress>
     </div>
   );
 }
