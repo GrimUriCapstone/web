@@ -24,7 +24,6 @@ function AuthSetting(): ReactElement {
         </button>
       ) : (
         <>
-          {" "}
           <button
             onClick={() => {
               signOut();

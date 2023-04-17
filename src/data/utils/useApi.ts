@@ -12,6 +12,7 @@ interface UseCustomClientReturns {
 
 export const useApi = (): UseCustomClientReturns => {
   const { accessToken } = useAuthStore();
+
   const api = axios.create({
     baseURL: VITE_SERVER_URL,
   });
@@ -19,15 +20,13 @@ export const useApi = (): UseCustomClientReturns => {
     baseURL: VITE_SERVER_URL,
   });
 
-  useEffect(() => {
-    authApi.interceptors.request.use((config) => {
-      if (accessToken != null) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-        return config;
-      }
-      throw new UnAuthorized();
-    });
-  }, [accessToken]);
+  authApi.interceptors.request.use((config) => {
+    if (accessToken != null) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+      return config;
+    }
+    throw new UnAuthorized();
+  });
 
   return {
     api,

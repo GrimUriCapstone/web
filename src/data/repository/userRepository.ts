@@ -6,6 +6,11 @@ import { AxiosError } from "axios";
 
 interface UserRepository {
   getUserInfo: () => Promise<User>;
+  postUserSignUp: ({ nickname }: PostUserSignUpProps) => Promise<User>;
+}
+
+interface PostUserSignUpProps {
+  nickname: string;
 }
 
 export const useUserRepository = (): UserRepository => {
@@ -25,5 +30,12 @@ export const useUserRepository = (): UserRepository => {
     }
   };
 
-  return { getUserInfo };
+  const postUserSignUp = async ({
+    nickname,
+  }: PostUserSignUpProps): Promise<User> => {
+    const result = await authApi.post("/user/signup", { nickname });
+    return result.data;
+  };
+
+  return { getUserInfo, postUserSignUp };
 };
