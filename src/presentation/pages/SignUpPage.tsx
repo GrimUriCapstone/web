@@ -1,6 +1,7 @@
 import { signOut } from "@data/utils/useAuth";
 import { useUserStore } from "@data/utils/useUser";
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
+import { LoadingModal } from "@presentation/components/LoadingModal";
 import { TopBar } from "@presentation/components/TopBar";
 import { useEffect, type ReactElement, useState } from "react";
 import { useNavigate } from "react-router-dom";

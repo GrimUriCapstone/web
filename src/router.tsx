@@ -1,5 +1,10 @@
-import { SETTINGS_PAGE_PATH, SIGNUP_PAGE_PATH } from "@domain/constants/paths";
+import {
+  AUTH_PAGE_PATH,
+  SETTINGS_PAGE_PATH,
+  SIGNUP_PAGE_PATH,
+} from "@domain/constants/paths";
 import { ProtectedRoute } from "@presentation/ProtectedRoute";
+import { AuthPage } from "@presentation/pages/AuthPage";
 import { MainPage } from "@presentation/pages/MainPage";
 import { SettingsPage } from "@presentation/pages/SettingsPage";
 import { SignUpPage } from "@presentation/pages/SignUpPage";
@@ -20,6 +25,10 @@ export const router = createBrowserRouter([
             <div>비밀</div>
           </ProtectedRoute>
         ),
+      },
+      {
+        path: AUTH_PAGE_PATH,
+        element: <AuthPage />,
       },
       {
         path: SIGNUP_PAGE_PATH,

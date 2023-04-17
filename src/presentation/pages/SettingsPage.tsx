@@ -1,4 +1,5 @@
 import { signInWithGoogle, signOut, useAuthStore } from "@data/utils/useAuth";
+import { LoadingModal } from "@presentation/components/LoadingModal";
 import { TopBar } from "@presentation/components/TopBar";
 import { type ReactElement } from "react";
 
@@ -33,8 +34,10 @@ function AuthSetting(): ReactElement {
 }
 
 export function SettingsPage(): ReactElement {
+  const isLoading = useAuthStore((state) => state.isLoading);
   return (
     <div>
+      {isLoading && <LoadingModal />}
       <TopBar title={"설정"} />
       <AuthSetting />
     </div>

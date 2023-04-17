@@ -6,7 +6,7 @@ import { devtools, persist } from "zustand/middleware";
 interface AuthStore {
   firebaseUser: Nullable<FirebaseUser>;
   accessToken: Nullable<string>;
-  needSignUp: boolean;
+  isLoading: boolean;
 }
 
 export const useAuthStore = create<AuthStore>()(
@@ -15,7 +15,7 @@ export const useAuthStore = create<AuthStore>()(
       (set) => ({
         firebaseUser: null,
         accessToken: null,
-        needSignUp: false,
+        isLoading: true,
       }),
       { name: "auth-storage" }
     )
@@ -26,7 +26,7 @@ export const signInWithGoogle = async (): Promise<void> => {
   try {
     await signInWithRedirect(auth, googleAuthProvider);
   } catch (error) {
-    console.log(error);
+    console.warn(error);
   }
 };
 
@@ -36,18 +36,26 @@ export const signOut = async (): Promise<void> => {
     useAuthStore.setState({
       firebaseUser: null,
       accessToken: null,
-      needSignUp: false,
     });
   } catch (error) {
-    console.log(error);
+    console.warn(error);
   }
 };
 
 auth.onAuthStateChanged(async (firebaseUser) => {
+  useAuthStore.setState({ isLoading: true });
   if (firebaseUser != null) {
     const tokenResult = await firebaseUser.getIdTokenResult();
-    useAuthStore.setState({ firebaseUser, accessToken: tokenResult.token });
+    useAuthStore.setState({
+      firebaseUser,
+      accessToken: tokenResult.token,
+      isLoading: false,
+    });
   } else {
-    useAuthStore.setState({ firebaseUser: null, accessToken: null });
+    useAuthStore.setState({
+      firebaseUser: null,
+      accessToken: null,
+      isLoading: false,
+    });
   }
 });
