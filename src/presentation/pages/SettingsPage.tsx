@@ -1,7 +1,13 @@
-import { signInWithGoogle, signOut, useAuthStore } from "@data/utils/useAuth";
+import {
+  signInWithGoogle,
+  signOut,
+  useAuthInitStore,
+  useAuthStore,
+} from "@data/utils/useAuth";
+import { useUserStore } from "@data/utils/useUser";
 import { LoadingModal } from "@presentation/components/LoadingModal";
 import { TopBar } from "@presentation/components/TopBar";
-import { type ReactElement } from "react";
+import { useState, type ReactElement, useEffect } from "react";
 
 function AuthSetting(): ReactElement {
   const accessToken = useAuthStore((state) => state.accessToken);
@@ -34,10 +40,11 @@ function AuthSetting(): ReactElement {
 }
 
 export function SettingsPage(): ReactElement {
-  const isLoading = useAuthStore((state) => state.isLoading);
+  const init = useAuthInitStore((state) => state.init);
+
   return (
     <div>
-      {isLoading && <LoadingModal />}
+      {!init && <LoadingModal />}
       <TopBar title={"설정"} />
       <AuthSetting />
     </div>

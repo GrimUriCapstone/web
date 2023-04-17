@@ -6,16 +6,22 @@ import { devtools, persist } from "zustand/middleware";
 interface AuthStore {
   firebaseUser: Nullable<FirebaseUser>;
   accessToken: Nullable<string>;
-  isLoading: boolean;
 }
 
+interface AuthInitStore {
+  init: boolean;
+}
+export const useAuthInitStore = create<AuthInitStore>()(
+  devtools((set) => ({
+    init: false,
+  }))
+);
 export const useAuthStore = create<AuthStore>()(
   devtools(
     persist(
       (set) => ({
         firebaseUser: null,
         accessToken: null,
-        isLoading: true,
       }),
       { name: "auth-storage" }
     )
@@ -43,19 +49,22 @@ export const signOut = async (): Promise<void> => {
 };
 
 auth.onAuthStateChanged(async (firebaseUser) => {
-  useAuthStore.setState({ isLoading: true });
   if (firebaseUser != null) {
     const tokenResult = await firebaseUser.getIdTokenResult();
     useAuthStore.setState({
       firebaseUser,
       accessToken: tokenResult.token,
-      isLoading: false,
+    });
+    useAuthInitStore.setState({
+      init: true,
     });
   } else {
     useAuthStore.setState({
       firebaseUser: null,
       accessToken: null,
-      isLoading: false,
+    });
+    useAuthInitStore.setState({
+      init: true,
     });
   }
 });
