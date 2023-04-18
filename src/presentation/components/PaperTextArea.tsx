@@ -12,6 +12,8 @@ interface PaperTextAreaProps {
 export function PaperTextArea({
   content,
   setContent,
+  title,
+  setTitle,
 }: PaperTextAreaProps): ReactElement {
   return (
     <div css={paperStyles}>
@@ -21,7 +23,14 @@ export function PaperTextArea({
           margin: 45px 0px 45px 0px;
         `}
       >
-        <input css={diaryTitleStyles} placeholder="제목을 입력해 주세요." />
+        <input
+          css={diaryTitleStyles}
+          placeholder="제목을 입력해 주세요."
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
       </div>
       <div css={diaryContentContainerStyles}>
         <textarea

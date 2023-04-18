@@ -1,3 +1,5 @@
+import { useDirayRepository } from "@data/repository/diaryRepository";
+import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
 import { ContentPadding } from "@presentation/atomics/Padding";
@@ -6,15 +8,37 @@ import {
   centerStyle,
   sectionGapStyle,
 } from "@presentation/atomics/styles/commonStyles";
+import { LoadingModal } from "@presentation/components/LoadingModal";
 import { PaperTextArea } from "@presentation/components/PaperTextArea";
 import { TopBar } from "@presentation/components/TopBar";
+import { useMutation } from "@tanstack/react-query";
 import { useState, type ReactElement } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function WritePage(): ReactElement {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const navigate = useNavigate();
+  const { postDiary } = useDirayRepository();
+  const { mutate, isLoading, isError } = useMutation(postDiary, {
+    onSuccess: () => {
+      navigate(HOME_PAGE_PATH);
+    },
+    onError: () => {
+      alert("작성 실패!");
+    },
+  });
+  const handlePost = (): void => {
+    if (content.length > 1000 || content.length === 0) {
+      alert("내용을 채워주세요");
+      return;
+    }
+    mutate({ content, title });
+    alert("작성 성공");
+  };
   return (
     <>
+      {isLoading && <LoadingModal />}
       <TopBar title={"일기 쓰기"} />
       <ContentPadding>
         <div
@@ -41,6 +65,7 @@ export function WritePage(): ReactElement {
               css={css`
                 width: 100px;
               `}
+              onClick={handlePost}
             >
               작성 완료
             </Button>
