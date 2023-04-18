@@ -6,7 +6,7 @@ import {
 import {
   BottomNavigation,
   BottomNavigationAction,
-  Button,
+  Fab,
   css,
 } from "@mui/material";
 import { type ReactElement } from "react";
@@ -22,9 +22,9 @@ interface BottonNavigationBarProps {
 const WriteButton = ({ showLabel }: { showLabel?: boolean }): ReactElement => {
   return (
     <Link to={WRITE_PAGE_PATH} css={linkStyle}>
-      <Button
+      <Fab
         color="primary"
-        variant="contained"
+        aria-label="add"
         css={css`
           border-radius: 100%;
           height: 64px;
@@ -32,7 +32,7 @@ const WriteButton = ({ showLabel }: { showLabel?: boolean }): ReactElement => {
         `}
       >
         <CreateIcon />
-      </Button>
+      </Fab>
     </Link>
   );
 };

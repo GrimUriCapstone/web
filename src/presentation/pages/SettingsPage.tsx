@@ -5,6 +5,7 @@ import {
   useAuthStore,
 } from "@data/utils/useAuth";
 import { useUserStore } from "@data/utils/useUser";
+import { ContentPadding } from "@presentation/atomics/Padding";
 import { LoadingModal } from "@presentation/components/LoadingModal";
 import { TopBar } from "@presentation/components/TopBar";
 import { useState, type ReactElement, useEffect } from "react";
@@ -45,7 +46,9 @@ export function SettingsPage(): ReactElement {
     <div>
       {!init && <LoadingModal />}
       <TopBar title={"설정"} />
-      <AuthSetting />
+      <ContentPadding>
+        <AuthSetting />
+      </ContentPadding>
     </div>
   );
 }

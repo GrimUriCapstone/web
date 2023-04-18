@@ -26,8 +26,6 @@ export function AuthProivder(): ReactElement {
     },
     onSuccess(data) {
       setUser(data);
-      navigate(HOME_PAGE_PATH);
-      alert("로그인 성공!");
     },
     onError: (error) => {
       if (error instanceof NotFound) {
@@ -37,13 +35,12 @@ export function AuthProivder(): ReactElement {
       }
       signOut();
       setUser(null);
-      navigate(HOME_PAGE_PATH);
-      alert("로그인 실패!");
     },
     retry: false,
   });
 
   useEffect(() => {
+    mutate();
     const unsub = useAuthStore.subscribe((state, prevState) => {
       if (prevState.firebaseUser === null && state.firebaseUser != null) {
         mutate();

@@ -1,5 +1,5 @@
 import { useAuthStore } from "@data/utils/useAuth";
-import { AUTH_PAGE_PATH } from "@domain/constants/paths";
+import { HOME_PAGE_PATH } from "@domain/constants/paths";
 
 import { useEffect, type ReactElement, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ export function ProtectedRoute({
   const navigate = useNavigate();
   useEffect((): void => {
     if (accessToken == null) {
-      navigate(AUTH_PAGE_PATH);
+      navigate(HOME_PAGE_PATH);
     }
   }, []);
 

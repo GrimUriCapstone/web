@@ -1,5 +1,6 @@
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
-import { ArrowLongIcon } from "@presentation/atomics/Icons";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,20 +15,19 @@ export function TopBar({
 }: TopBarProps): ReactElement {
   const navigate = useNavigate();
   return (
-    <div className="navbar bg-base-100">
-      <div className="navbar-start">
-        <button
-          className="btn btn-circle btn-ghost"
+    <AppBar>
+      <Toolbar variant="dense">
+        <IconButton
           onClick={() => {
             navigate(to);
           }}
         >
-          <ArrowLongIcon />
-        </button>
-      </div>
-      <div className="navbar-center">
-        <h2>{title}</h2>
-      </div>
-    </div>
+          <ArrowBackIosIcon />
+        </IconButton>
+        <Typography variant="h6" component="div">
+          {title}
+        </Typography>
+      </Toolbar>
+    </AppBar>
   );
 }

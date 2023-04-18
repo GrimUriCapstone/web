@@ -13,6 +13,7 @@ export function ContentPadding({
       css={css`
         height: 100%;
         width: 100%;
+        margin-top: 56px;
         padding: 20px 10px;
         ${mq.md} {
           padding: 20px 20px;

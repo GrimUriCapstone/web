@@ -8,8 +8,8 @@ export function DiaryPage(): ReactElement {
   const { user } = useUserStore();
   return (
     <>
-      <TopBar title={user!.nickname} />
-      <ContentPadding></ContentPadding>
+      <TopBar title={user == null ? "" : user.nickname} />
+      <ContentPadding>s</ContentPadding>
       <BottonNavigationBar activeIdx={1} />
     </>
   );
