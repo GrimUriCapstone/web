@@ -5,7 +5,7 @@ import {
   WRITE_PAGE_PATH,
 } from "@domain/constants/paths";
 import { ProtectedRoute } from "@presentation/ProtectedRoute";
-import { DiaryPage } from "@presentation/pages/DiaryPage";
+import { DiaryPage } from "@presentation/diaryPage/DiaryPage";
 import { MainPage } from "@presentation/pages/MainPage";
 import { SettingsPage } from "@presentation/pages/SettingsPage";
 import { SignUpPage } from "@presentation/pages/SignUpPage";

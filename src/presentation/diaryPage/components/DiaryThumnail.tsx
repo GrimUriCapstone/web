@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import { Skeleton } from "@mui/material";
 import { type ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { Image } from "@presentation/atomics/Image";
+import { Img } from "@presentation/atomics/Image";
 export interface DiaryThumnailProps {
   diary: Diary;
 }
@@ -13,7 +13,7 @@ export function DiaryThumnail({ diary }: DiaryThumnailProps): ReactElement {
 
   return (
     <Link to={HOME_PAGE_PATH} css={css``}>
-      <Image
+      <Img
         css={css`
           object-fit: contain;
           border-radius: 16px;

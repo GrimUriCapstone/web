@@ -1,13 +1,15 @@
 import { useDirayRepository } from "@data/repository/diaryRepository";
 import { useUserStore } from "@data/utils/useUser";
 import { css } from "@emotion/react";
+import { AppBar, Avatar, Typography } from "@mui/material";
+import { Img } from "@presentation/atomics/Image";
 
 import { ContentPadding } from "@presentation/atomics/Padding";
 import { BottonNavigationBar } from "@presentation/components/BottomNavigationBar";
 import {
   DiaryThumnailsSkeleton,
   DiaryThumnail,
-} from "@presentation/components/DiaryThumnail";
+} from "@presentation/diaryPage/components/DiaryThumnail";
 import { TopBar } from "@presentation/components/TopBar";
 import { mq } from "@presentation/theme/mediaQuery";
 import { useQuery } from "@tanstack/react-query";
@@ -22,8 +24,20 @@ export function DiaryPage(): ReactElement {
       console.warn(err);
     },
   });
+  const nickname = user == null ? "" : user.nickname;
   return (
     <>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+        `}
+      >
+        <Typography variant="h6">{nickname}</Typography>
+        <Avatar>
+          <Img src="" />
+        </Avatar>
+      </div>
       <ContentPadding>
         <div css={diaryThumnailContainerStyle}>
           {isLoading ? (
