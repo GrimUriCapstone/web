@@ -1,13 +1,14 @@
 import { SETTINGS_PAGE_PATH } from "@domain/constants/paths";
 import { css } from "@emotion/react";
 import { CogIcon, NotificationIcon } from "@presentation/atomics/Icons";
+import { ContentPadding } from "@presentation/atomics/Padding";
 import { BottonNavigationBar } from "@presentation/components/BottomNavigationBar";
 import { type ReactElement } from "react";
 import { Link } from "react-router-dom";
 
 export function MainPage(): ReactElement {
   return (
-    <div>
+    <>
       <div className="navbar bg-base-100">
         <div className="navbar-start"></div>
         <div className="navbar-center">
@@ -27,13 +28,8 @@ export function MainPage(): ReactElement {
           </Link>
         </div>
       </div>
-      <div
-        css={css`
-          width: 100%;
-          height: 80vh;
-        `}
-      />
+      <ContentPadding>s</ContentPadding>
       <BottonNavigationBar activeIdx={0} />
-    </div>
+    </>
   );
 }

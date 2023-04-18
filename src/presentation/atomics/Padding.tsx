@@ -13,17 +13,29 @@ export function ContentPadding({
       css={css`
         height: 100%;
         width: 100%;
-        margin-top: 56px;
-        padding: 20px 10px;
-        ${mq.md} {
-          padding: 20px 20px;
+        overflow: hidden;
+        padding: 20px 10px 20px 10px;
+        ${mq.sm} {
+          padding: 20px 20px 20px 20px;
         }
-        ${mq.lg} {
-          padding: 20px 40px;
+        ${mq.md} {
+          padding: 20px 30px 20px 30px;
         }
       `}
     >
       {children}
+      <ToolBarPadding />
     </div>
+  );
+}
+
+export function ToolBarPadding(): ReactElement {
+  return (
+    <div
+      css={css`
+        width: 100%;
+        height: 56px;
+      `}
+    />
   );
 }

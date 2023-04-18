@@ -15,6 +15,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CreateIcon from "@mui/icons-material/Create";
 import { Link, useNavigate } from "react-router-dom";
 import { linkStyle } from "@presentation/atomics/styles/commonStyles";
+import { ToolBarPadding } from "@presentation/atomics/Padding";
 interface BottonNavigationBarProps {
   activeIdx: number;
 }
@@ -42,35 +43,37 @@ export function BottonNavigationBar({
 }: BottonNavigationBarProps): ReactElement {
   const navigate = useNavigate();
   return (
-    <BottomNavigation
-      css={css`
-        position: sticky;
-        bottom: 0px;
-        z-index: 20;
-      `}
-      value={activeIdx}
-      showLabels={false}
-    >
-      <BottomNavigationAction
-        label="Home"
-        icon={<HomeIcon />}
-        value={0}
-        css={bottomActionStyle}
-        onClick={() => {
-          navigate(HOME_PAGE_PATH);
-        }}
-      />
-      <WriteButton />
-      <BottomNavigationAction
-        value={1}
-        label="Diary"
-        icon={<MenuBookIcon />}
-        css={bottomActionStyle}
-        onClick={() => {
-          navigate(DIARY_PAGE_PATH);
-        }}
-      />
-    </BottomNavigation>
+    <>
+      <BottomNavigation
+        css={css`
+          position: sticky;
+          bottom: 0px;
+          z-index: 20;
+        `}
+        value={activeIdx}
+        showLabels={false}
+      >
+        <BottomNavigationAction
+          label="Home"
+          icon={<HomeIcon />}
+          value={0}
+          css={bottomActionStyle}
+          onClick={() => {
+            navigate(HOME_PAGE_PATH);
+          }}
+        />
+        <WriteButton />
+        <BottomNavigationAction
+          value={1}
+          label="Diary"
+          icon={<MenuBookIcon />}
+          css={bottomActionStyle}
+          onClick={() => {
+            navigate(DIARY_PAGE_PATH);
+          }}
+        />
+      </BottomNavigation>
+    </>
   );
 }
 
