@@ -1,11 +1,11 @@
 import {
-  AUTH_PAGE_PATH,
+  DIARY_PAGE_PATH,
   SETTINGS_PAGE_PATH,
   SIGNUP_PAGE_PATH,
   WRITE_PAGE_PATH,
 } from "@domain/constants/paths";
 import { ProtectedRoute } from "@presentation/ProtectedRoute";
-import { AuthPage } from "@presentation/pages/AuthPage";
+import { DiaryPage } from "@presentation/pages/DiaryPage";
 import { MainPage } from "@presentation/pages/MainPage";
 import { SettingsPage } from "@presentation/pages/SettingsPage";
 import { SignUpPage } from "@presentation/pages/SignUpPage";
@@ -29,16 +29,16 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: AUTH_PAGE_PATH,
-        element: <AuthPage />,
-      },
-      {
         path: SIGNUP_PAGE_PATH,
         element: <SignUpPage />,
       },
       {
         path: WRITE_PAGE_PATH,
         element: <WritePage />,
+      },
+      {
+        path: DIARY_PAGE_PATH,
+        element: <DiaryPage />,
       },
       { path: SETTINGS_PAGE_PATH, element: <SettingsPage /> },
     ],

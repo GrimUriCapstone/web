@@ -1,4 +1,5 @@
 import { SETTINGS_PAGE_PATH } from "@domain/constants/paths";
+import { css } from "@emotion/react";
 import { CogIcon, NotificationIcon } from "@presentation/atomics/Icons";
 import { BottonNavigationBar } from "@presentation/components/BottomNavigationBar";
 import { type ReactElement } from "react";
@@ -26,6 +27,12 @@ export function MainPage(): ReactElement {
           </Link>
         </div>
       </div>
+      <div
+        css={css`
+          width: 100%;
+          height: 80vh;
+        `}
+      />
       <BottonNavigationBar activeIdx={0} />
     </div>
   );

@@ -21,3 +21,9 @@ export const sectionGapStyle = css`
     gap: 40px;
   }
 `;
+
+export const linkStyle = css`
+  height: min-content;
+  align-self: center;
+  justify-self: center;
+`;
