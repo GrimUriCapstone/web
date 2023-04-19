@@ -51,6 +51,16 @@ export function Page({ children }: ContentPaddingProps): ReactElement {
     </div>
   );
 }
+
+export const pageWidthStyle = css`
+  width: 100%;
+  ${mq.sm} {
+    width: 600px;
+  }
+  ${mq.lg} {
+    width: 900px;
+  }
+`;
 export const contentPaddingXStyle = css`
   padding: 0px 10px 0px 10px;
   ${mq.sm} {

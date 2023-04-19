@@ -1,9 +1,12 @@
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, IconButton, Toolbar, Typography, css } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToolBarPadding } from "@presentation/common/atomics/PageContent";
+import {
+  ToolBarPadding,
+  pageWidthStyle,
+} from "@presentation/common/atomics/PageContent";
 
 interface TopBarProps {
   title: string;
@@ -18,7 +21,12 @@ export function TopBar({
   return (
     <>
       <ToolBarPadding />
-      <AppBar>
+      <AppBar
+        css={css`
+          ${pageWidthStyle};
+          right: auto;
+        `}
+      >
         <Toolbar variant="dense">
           <IconButton
             onClick={() => {

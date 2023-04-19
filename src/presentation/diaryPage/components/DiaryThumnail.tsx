@@ -1,4 +1,4 @@
-import { HOME_PAGE_PATH } from "@domain/constants/paths";
+import { DIARY_PAGE_PATH, HOME_PAGE_PATH } from "@domain/constants/paths";
 import { type Diary } from "@domain/models/diary";
 import { css } from "@emotion/react";
 import { Skeleton } from "@mui/material";
@@ -12,7 +12,7 @@ export function DiaryThumnail({ diary }: DiaryThumnailProps): ReactElement {
   // TODO : REPLACE
 
   return (
-    <Link to={HOME_PAGE_PATH} css={css``}>
+    <Link to={`${DIARY_PAGE_PATH}/${diary.diaryId}`} css={css``}>
       <Img
         css={css`
           object-fit: contain;

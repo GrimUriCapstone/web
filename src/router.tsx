@@ -12,6 +12,7 @@ import { SignUpPage } from "@presentation/signUpPage/SignUpPage";
 import { WritePage } from "@presentation/writePage/WritePage";
 import { AuthProivder } from "@presentation/providers/AuthProvider";
 import { createBrowserRouter } from "react-router-dom";
+import { DiaryDetailPage } from "@presentation/diaryDetailPage/DiaryDetailPage";
 export const router = createBrowserRouter([
   {
     element: <AuthProivder />,
@@ -40,6 +41,11 @@ export const router = createBrowserRouter([
         path: DIARY_PAGE_PATH,
         element: <DiaryPage />,
       },
+      {
+        path: `${DIARY_PAGE_PATH}/:diaryId`,
+        element: <DiaryDetailPage />,
+      },
+
       { path: SETTINGS_PAGE_PATH, element: <SettingsPage /> },
     ],
   },
