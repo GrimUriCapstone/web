@@ -24,8 +24,8 @@ export function DiaryPage(): ReactElement {
 
   return (
     <>
-      <DiaryUserInfo />
       <ContentPadding>
+        <DiaryUserInfo />
         <div css={diaryThumnailContainerStyle}>
           {isLoading ? (
             <DiaryThumnailsSkeleton />

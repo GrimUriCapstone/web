@@ -5,12 +5,15 @@ import { centerColStyle } from "../styles/commonStyles";
 
 interface ContentPaddingProps {
   children: ReactNode;
+  className?: string;
 }
 export function ContentPadding({
   children,
+  className,
 }: ContentPaddingProps): ReactElement {
   return (
     <div
+      className={className}
       css={css`
         height: 100%;
         width: 100%;
@@ -31,14 +34,17 @@ export function ContentPadding({
       `}
     >
       {children}
-      <ToolBarPadding />
     </div>
   );
 }
 
-export function Page({ children }: ContentPaddingProps): ReactElement {
+export function Page({
+  children,
+  className,
+}: ContentPaddingProps): ReactElement {
   return (
     <div
+      className={className}
       css={css`
         background-color: white;
         margin: 0 auto;
@@ -65,15 +71,6 @@ export const pageWidthStyle = css`
   }
   ${mq.lg} {
     width: 900px;
-  }
-`;
-export const contentPaddingXStyle = css`
-  padding: 0px 10px 0px 10px;
-  ${mq.sm} {
-    padding: 0px 20px 0px 20px;
-  }
-  ${mq.md} {
-    padding: 0px 30px 0px 30px;
   }
 `;
 export function ToolBarPadding(): ReactElement {

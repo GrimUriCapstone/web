@@ -13,7 +13,6 @@ import { type ReactElement } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ToolBarPadding,
-  contentPaddingXStyle,
   pageWidthStyle,
 } from "@presentation/common/atomics/PageContent";
 
@@ -60,7 +59,6 @@ export function MainTopBar(): ReactElement {
       <AppBar
         css={css`
           ${pageWidthStyle};
-          ${contentPaddingXStyle}
           right: auto;
           display: flex;
           justify-content: center;

@@ -2,16 +2,21 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { parseNumber } from "@data/utils/parseNumber";
 import { DIARY_PAGE_PATH } from "@domain/constants/paths";
 import { UnKnown } from "@domain/errors/UnKnown";
-import { Typography, css } from "@mui/material";
+import { IconButton, Typography, css } from "@mui/material";
 import { Img } from "@presentation/common/atomics/Image";
-import { ContentPadding } from "@presentation/common/atomics/PageContent";
+import { ContentPadding, Page } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
-import { PaperArea } from "@presentation/common/components/PaperTextArea";
-import { TopBar } from "@presentation/common/components/TopBar";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, type ReactElement } from "react";
+import { useEffect, type ReactElement, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { DiaryModal } from "./components/DiaryModal";
+import { mq } from "@presentation/common/theme/mediaQuery";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+const tmp = `data!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.ordata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentiginalContentdata!.originalContentContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContent
+          data!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.ordata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentiginalContentdata!.originalContentContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContentdata!.originalContent
+        `;
 export function DiaryDetailPage(): ReactElement {
   const { diaryId } = useParams();
   const { getDiary } = useDirayRepository();
@@ -34,24 +39,74 @@ export function DiaryDetailPage(): ReactElement {
       navigate(DIARY_PAGE_PATH);
     }
   }, []);
-
+  const [expand, setExpand] = useState(false);
+  const closeModal = (): void => {
+    setExpand(false);
+  };
+  const openModal = (): void => {
+    setExpand(true);
+  };
   if (isLoading) {
     return <LoadingModal />;
   }
   return (
     <>
-      <TopBar title={data!.title} to={DIARY_PAGE_PATH} />
-      <ContentPadding>
-        <Img
-          src={""}
+      <div>
+        <Img src={""} css={diaryImageStyle} />
+      </div>
+      <ContentPadding
+        css={css`
+          position: relative;
+        `}
+      >
+        <div
           css={css`
-            border-radius: 32px;
+            display: flex;
+            flex-direction: row;
             width: 100%;
+            align-items: center;
+            justify-content: space-between;
           `}
-        />
-        <Typography variant="h5">{data!.title}</Typography>
-        <Typography>{data!.originalContent}</Typography>
+        >
+          <IconButton
+            onClick={() => {
+              navigate(DIARY_PAGE_PATH);
+            }}
+          >
+            <ArrowBackIosIcon />
+          </IconButton>
+          <Typography variant="h5">{data!.title}</Typography>
+          <IconButton onClick={openModal}>
+            <ExpandLessIcon />
+          </IconButton>
+        </div>
+        <pre
+          css={css`
+            width: 100%;
+            white-space: pre-wrap;
+            line-break: anywhere;
+            text-indent: 10px;
+            overflow-y: scroll;
+          `}
+        >
+          {tmp}
+        </pre>
+        {/** data!.originalContent */}
       </ContentPadding>
+      {expand && (
+        <DiaryModal content={tmp} title={data!.title} onClick={closeModal} />
+      )}
     </>
   );
 }
+
+const diaryImageStyle = css`
+  margin: 0 auto;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 360px;
+  ${mq.sm} {
+    width: 360px;
+    max-width: 360px;
+  }
+`;
