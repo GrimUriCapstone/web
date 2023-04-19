@@ -15,7 +15,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CreateIcon from "@mui/icons-material/Create";
 import { Link, useNavigate } from "react-router-dom";
 import { linkStyle } from "@presentation/common/styles/commonStyles";
-import { ToolBarPadding } from "@presentation/common/atomics/Padding";
+import { ToolBarPadding } from "@presentation/common/atomics/PageContent";
 interface BottonNavigationBarProps {
   activeIdx: number;
 }

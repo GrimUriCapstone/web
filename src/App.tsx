@@ -7,6 +7,7 @@ import { Global, css } from "@emotion/react";
 import reset from "emotion-reset";
 import { green } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Page, pageStyle } from "@presentation/common/atomics/PageContent";
 export function App(): ReactElement {
   const theme = createTheme({
     palette: {
@@ -30,10 +31,14 @@ export function App(): ReactElement {
               width: 100%;
               height: 100%;
               overflow: hidden;
+              background-color: gray;
             }
           `}
         />
-        <RouterProvider router={router} />
+
+        <Page>
+          <RouterProvider router={router} />
+        </Page>
       </ThemeProvider>
     </QueryClientProvider>
   );

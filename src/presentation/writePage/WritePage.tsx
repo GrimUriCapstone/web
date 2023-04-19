@@ -2,7 +2,7 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
-import { ContentPadding } from "@presentation/common/atomics/Padding";
+import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { PaperTextArea } from "@presentation/common/components/PaperTextArea";
 import { TopBar } from "@presentation/common/components/TopBar";

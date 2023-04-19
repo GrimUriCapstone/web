@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { mq } from "@presentation/common/theme/mediaQuery";
 import { type ReactNode, type ReactElement } from "react";
+import { centerColStyle } from "../styles/commonStyles";
 
 interface ContentPaddingProps {
   children: ReactNode;
@@ -20,6 +21,28 @@ export function ContentPadding({
         }
         ${mq.md} {
           padding: 20px 30px 20px 30px;
+        }
+      `}
+    >
+      {children}
+      <ToolBarPadding />
+    </div>
+  );
+}
+
+export function Page({ children }: ContentPaddingProps): ReactElement {
+  return (
+    <div
+      css={css`
+        background-color: white;
+        margin: 0 auto;
+        height: 100%;
+        width: 100%;
+        ${mq.sm} {
+          width: 600px;
+        }
+        ${mq.lg} {
+          width: 900px;
         }
       `}
     >

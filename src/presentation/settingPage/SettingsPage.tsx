@@ -4,7 +4,7 @@ import {
   useAuthInitStore,
   useAuthStore,
 } from "@data/utils/useAuth";
-import { ContentPadding } from "@presentation/common/atomics/Padding";
+import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { TopBar } from "@presentation/common/components/TopBar";
 import { type ReactElement } from "react";

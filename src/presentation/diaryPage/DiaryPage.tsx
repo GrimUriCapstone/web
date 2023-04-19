@@ -1,7 +1,7 @@
 import { useDirayRepository } from "@data/repository/diaryRepository";
 import { css } from "@emotion/react";
 
-import { ContentPadding } from "@presentation/common/atomics/Padding";
+import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { BottonNavigationBar } from "@presentation/common/components/BottomNavigationBar";
 import {
   DiaryThumnailsSkeleton,

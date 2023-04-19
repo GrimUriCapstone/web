@@ -3,7 +3,7 @@ import { type User } from "@domain/models/user";
 import { css } from "@emotion/react";
 import { Avatar, Typography } from "@mui/material";
 import { Img } from "@presentation/common/atomics/Image";
-import { contentPaddingXStyle } from "@presentation/common/atomics/Padding";
+import { contentPaddingXStyle } from "@presentation/common/atomics/PageContent";
 import { type ReactElement } from "react";
 
 export function DiaryUserInfo(): ReactElement {
