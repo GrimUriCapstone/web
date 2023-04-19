@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { mq } from "@presentation/theme/mediaQuery";
+import { mq } from "@presentation/common/theme/mediaQuery";
 
 export const centerStyle = css`
   display: flex;

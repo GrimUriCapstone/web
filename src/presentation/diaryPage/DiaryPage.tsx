@@ -5,13 +5,13 @@ import { AppBar, Avatar, Typography } from "@mui/material";
 import { Img } from "@presentation/common/atomics/Image";
 
 import { ContentPadding } from "@presentation/common/atomics/Padding";
-import { BottonNavigationBar } from "@presentation/components/BottomNavigationBar";
+import { BottonNavigationBar } from "@presentation/common/components/BottomNavigationBar";
 import {
   DiaryThumnailsSkeleton,
   DiaryThumnail,
 } from "@presentation/diaryPage/components/DiaryThumnail";
 import { TopBar } from "@presentation/components/TopBar";
-import { mq } from "@presentation/theme/mediaQuery";
+import { mq } from "@presentation/common/theme/mediaQuery";
 import { useQuery } from "@tanstack/react-query";
 import { type ReactElement } from "react";
 

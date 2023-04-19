@@ -2,7 +2,7 @@ import { SETTINGS_PAGE_PATH } from "@domain/constants/paths";
 import { css } from "@emotion/react";
 import { CogIcon, NotificationIcon } from "@presentation/common/atomics/Icons";
 import { ContentPadding } from "@presentation/common/atomics/Padding";
-import { BottonNavigationBar } from "@presentation/components/BottomNavigationBar";
+import { BottonNavigationBar } from "@presentation/common/components/BottomNavigationBar";
 import { type ReactElement } from "react";
 import { Link } from "react-router-dom";
 
