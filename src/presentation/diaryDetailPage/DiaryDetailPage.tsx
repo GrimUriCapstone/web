@@ -9,7 +9,6 @@ import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, type ReactElement, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { DiaryModal } from "./components/DiaryModal";
 import { mq } from "@presentation/common/theme/mediaQuery";
@@ -46,11 +45,9 @@ export function DiaryDetailPage(): ReactElement {
   const openModal = (): void => {
     setExpand(true);
   };
-  if (isLoading) {
-    return <LoadingModal />;
-  }
   return (
     <>
+      {isLoading && <LoadingModal />}
       <div>
         <Img src={""} css={diaryImageStyle} />
       </div>
@@ -75,7 +72,7 @@ export function DiaryDetailPage(): ReactElement {
           >
             <ArrowBackIosIcon />
           </IconButton>
-          <Typography variant="h5">{data!.title}</Typography>
+          <Typography variant="h5">{data?.title}</Typography>
           <IconButton onClick={openModal}>
             <ExpandLessIcon />
           </IconButton>
