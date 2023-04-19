@@ -12,16 +12,6 @@ export const centerColStyle = css`
   flex-direction: column;
 `;
 
-export const sectionGapStyle = css`
-  gap: 20px;
-  ${mq.md} {
-    gap: 30px;
-  }
-  ${mq.lg} {
-    gap: 40px;
-  }
-`;
-
 export const linkStyle = css`
   height: min-content;
   align-self: center;

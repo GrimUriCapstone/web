@@ -1,5 +1,12 @@
 import { HOME_PAGE_PATH, SETTINGS_PAGE_PATH } from "@domain/constants/paths";
-import { AppBar, IconButton, Toolbar, Typography, css } from "@mui/material";
+import {
+  AppBar,
+  IconButton,
+  Toolbar,
+  Typography,
+  css,
+  useTheme,
+} from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { type ReactElement } from "react";
@@ -11,12 +18,12 @@ import {
 } from "@presentation/common/atomics/PageContent";
 
 interface TopBarProps {
-  title: string;
+  title?: string;
   to?: string;
 }
 
 export function TopBar({
-  title,
+  title = "",
   to = HOME_PAGE_PATH,
 }: TopBarProps): ReactElement {
   const navigate = useNavigate();

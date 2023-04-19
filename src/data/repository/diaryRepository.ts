@@ -8,6 +8,7 @@ import { AxiosError } from "axios";
 interface DiaryRepository {
   postDiary: ({ title, content }: PostDiaryProps) => Promise<boolean>;
   getDiaries: () => Promise<Diary[]>;
+  getDiary: (diaryId: number) => Promise<Diary>;
 }
 
 interface PostDiaryProps {
@@ -29,5 +30,10 @@ export const useDirayRepository = (): DiaryRepository => {
     const result = await authApi.get("/diary/all");
     return result.data;
   };
-  return { postDiary, getDiaries };
+
+  const getDiary = async (diaryId: number): Promise<Diary> => {
+    const result = await authApi.get(`/diary/${diaryId}`);
+    return result.data;
+  };
+  return { postDiary, getDiaries, getDiary };
 };

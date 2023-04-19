@@ -16,11 +16,17 @@ export function ContentPadding({
         width: 100%;
         overflow: hidden;
         padding: 20px 10px 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
         ${mq.sm} {
           padding: 20px 20px 20px 20px;
+          gap: 15px;
         }
         ${mq.md} {
           padding: 20px 30px 20px 30px;
+          gap: 20px;
         }
       `}
     >
@@ -41,7 +47,7 @@ export function Page({ children }: ContentPaddingProps): ReactElement {
         ${mq.sm} {
           width: 600px;
         }
-        ${mq.lg} {
+        ${mq.md} {
           width: 900px;
         }
       `}
@@ -76,6 +82,17 @@ export function ToolBarPadding(): ReactElement {
       css={css`
         width: 100%;
         height: 56px;
+      `}
+    />
+  );
+}
+
+export function BotBarPadding(): ReactElement {
+  return (
+    <div
+      css={css`
+        width: 100%;
+        height: 70px;
       `}
     />
   );

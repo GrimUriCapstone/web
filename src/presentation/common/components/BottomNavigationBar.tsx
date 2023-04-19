@@ -15,7 +15,6 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CreateIcon from "@mui/icons-material/Create";
 import { Link, useNavigate } from "react-router-dom";
 import { linkStyle } from "@presentation/common/styles/commonStyles";
-import { ToolBarPadding } from "@presentation/common/atomics/PageContent";
 interface BottonNavigationBarProps {
   activeIdx: number;
 }
@@ -47,8 +46,13 @@ export function BottonNavigationBar({
       <BottomNavigation
         css={css`
           position: sticky;
-          bottom: 0px;
+          bottom: 10px;
           z-index: 20;
+          background-color: white;
+          border-radius: 20px;
+          box-shadow: 0px 0px 20px 10px #80808021;
+          margin: 0px 10px;
+          height: 70px;
         `}
         value={activeIdx}
         showLabels={false}

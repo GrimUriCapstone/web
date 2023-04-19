@@ -6,11 +6,7 @@ import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { PaperTextArea } from "@presentation/common/components/PaperTextArea";
 import { TopBar } from "@presentation/common/components/TopBar";
-import {
-  centerColStyle,
-  centerStyle,
-  sectionGapStyle,
-} from "@presentation/common/styles/commonStyles";
+import { centerStyle } from "@presentation/common/styles/commonStyles";
 
 import { useMutation } from "@tanstack/react-query";
 import { useState, type ReactElement } from "react";
@@ -42,35 +38,28 @@ export function WritePage(): ReactElement {
       {isLoading && <LoadingModal />}
       <TopBar title={"일기 쓰기"} />
       <ContentPadding>
+        <PaperTextArea
+          setContent={setContent}
+          content={content}
+          title={title}
+          setTitle={setTitle}
+        />
         <div
           css={css`
-            ${centerColStyle}
-            ${sectionGapStyle}
+            ${centerStyle}
+            gap: 10px;
           `}
         >
-          <PaperTextArea
-            setContent={setContent}
-            content={content}
-            title={title}
-            setTitle={setTitle}
-          />
-          <div
+          <div>{content.length}/1000자</div>
+          <Button
+            variant="contained"
             css={css`
-              ${centerStyle}
-              gap: 10px;
+              width: 100px;
             `}
+            onClick={handlePost}
           >
-            <div>{content.length}/1000자</div>
-            <Button
-              variant="contained"
-              css={css`
-                width: 100px;
-              `}
-              onClick={handlePost}
-            >
-              작성 완료
-            </Button>
-          </div>
+            작성 완료
+          </Button>
         </div>
       </ContentPadding>
     </>

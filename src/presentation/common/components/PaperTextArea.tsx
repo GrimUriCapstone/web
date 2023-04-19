@@ -48,10 +48,32 @@ export function PaperTextArea({
   );
 }
 
+interface PaperAreaProps {
+  content: string;
+  title: string;
+}
+export function PaperArea({ content, title }: PaperAreaProps): ReactElement {
+  return (
+    <div css={paperStyles}>
+      <div
+        css={css`
+          ${centerStyle}
+          margin: 45px 0px 45px 0px;
+        `}
+      >
+        <p css={diaryTitleStyles}>{title}</p>
+      </div>
+      <div css={diaryContentContainerStyles}>
+        <pre css={diaryContentStyles}>{content}</pre>
+      </div>
+    </div>
+  );
+}
+
 const paperStyles = css`
   position: relative;
   width: 100%;
-  min-width: 400px;
+  min-width: 200px;
   height: 80vh;
   background: #fafafa;
   border-radius: 10px;
@@ -73,6 +95,7 @@ const paperStyles = css`
 `;
 
 const diaryTitleStyles = css`
+  text-align: center;
   max-width: 400px;
   width: 100%;
   min-width: 200px;
@@ -97,6 +120,7 @@ const diaryContentStyles = css`
   font-size: 18px;
   z-index: 1;
   resize: none;
+  white-space: pre-wrap;
 `;
 
 const diaryContentContainerStyles = css`
