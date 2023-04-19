@@ -3,14 +3,15 @@ import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
 import { ContentPadding } from "@presentation/common/atomics/Padding";
+import { LoadingModal } from "@presentation/common/components/LoadingModal";
+import { PaperTextArea } from "@presentation/common/components/PaperTextArea";
+import { TopBar } from "@presentation/common/components/TopBar";
 import {
   centerColStyle,
   centerStyle,
   sectionGapStyle,
 } from "@presentation/common/styles/commonStyles";
-import { LoadingModal } from "@presentation/components/LoadingModal";
-import { PaperTextArea } from "@presentation/components/PaperTextArea";
-import { TopBar } from "@presentation/components/TopBar";
+
 import { useMutation } from "@tanstack/react-query";
 import { useState, type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";

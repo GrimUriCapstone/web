@@ -10,7 +10,7 @@ import {
   DiaryThumnailsSkeleton,
   DiaryThumnail,
 } from "@presentation/diaryPage/components/DiaryThumnail";
-import { TopBar } from "@presentation/components/TopBar";
+
 import { mq } from "@presentation/common/theme/mediaQuery";
 import { useQuery } from "@tanstack/react-query";
 import { type ReactElement } from "react";

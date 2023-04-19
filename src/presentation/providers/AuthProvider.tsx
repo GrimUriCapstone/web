@@ -2,11 +2,12 @@ import { useUserRepository } from "@data/repository/userRepository";
 import { signOut, useAuthStore } from "@data/utils/useAuth";
 import { useUserStore } from "@data/utils/useUser";
 
-import { HOME_PAGE_PATH, SIGNUP_PAGE_PATH } from "@domain/constants/paths";
+import { SIGNUP_PAGE_PATH } from "@domain/constants/paths";
 import { NotFound } from "@domain/errors/NotFound";
 import { UnAuthorized } from "@domain/errors/UnAuthorized";
-import { LoadingModal } from "@presentation/components/LoadingModal";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { LoadingModal } from "@presentation/common/components/LoadingModal";
+
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, type ReactElement } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 

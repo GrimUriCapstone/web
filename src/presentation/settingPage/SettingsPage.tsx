@@ -4,11 +4,10 @@ import {
   useAuthInitStore,
   useAuthStore,
 } from "@data/utils/useAuth";
-import { useUserStore } from "@data/utils/useUser";
 import { ContentPadding } from "@presentation/common/atomics/Padding";
-import { LoadingModal } from "@presentation/components/LoadingModal";
-import { TopBar } from "@presentation/components/TopBar";
-import { useState, type ReactElement, useEffect } from "react";
+import { LoadingModal } from "@presentation/common/components/LoadingModal";
+import { TopBar } from "@presentation/common/components/TopBar";
+import { type ReactElement } from "react";
 
 function AuthSetting(): ReactElement {
   const accessToken = useAuthStore((state) => state.accessToken);
