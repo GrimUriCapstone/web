@@ -6,10 +6,10 @@ import {
 } from "@domain/constants/paths";
 import { ProtectedRoute } from "@presentation/ProtectedRoute";
 import { DiaryPage } from "@presentation/diaryPage/DiaryPage";
-import { MainPage } from "@presentation/pages/MainPage";
-import { SettingsPage } from "@presentation/pages/SettingsPage";
-import { SignUpPage } from "@presentation/pages/SignUpPage";
-import { WritePage } from "@presentation/pages/WritePage";
+import { MainPage } from "@presentation/mainPage/MainPage";
+import { SettingsPage } from "@presentation/settingPage/SettingsPage";
+import { SignUpPage } from "@presentation/signUpPage/SignUpPage";
+import { WritePage } from "@presentation/writePage/WritePage";
 import { AuthProivder } from "@presentation/providers/AuthProvider";
 import { createBrowserRouter } from "react-router-dom";
 export const router = createBrowserRouter([
