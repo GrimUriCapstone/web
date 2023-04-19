@@ -28,7 +28,15 @@ export function ContentPadding({
     </div>
   );
 }
-
+export const contentPaddingXStyle = css`
+  padding: 0px 10px 0px 10px;
+  ${mq.sm} {
+    padding: 0px 20px 0px 20px;
+  }
+  ${mq.md} {
+    padding: 0px 30px 0px 30px;
+  }
+`;
 export function ToolBarPadding(): ReactElement {
   return (
     <div

@@ -12,7 +12,7 @@ import { useEffect, type ReactElement } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 export function AuthProivder(): ReactElement {
-  const { setUser } = useUserStore();
+  const { setUser, user } = useUserStore();
   const accessToken = useAuthStore((state) => state.accessToken);
   const needSignUp = useUserStore((state) => state.needSignUp);
   const { getUserInfo } = useUserRepository();
@@ -41,7 +41,9 @@ export function AuthProivder(): ReactElement {
   });
 
   useEffect(() => {
-    mutate();
+    if (accessToken != null) {
+      mutate();
+    }
     const unsub = useAuthStore.subscribe((state, prevState) => {
       if (prevState.firebaseUser === null && state.firebaseUser != null) {
         mutate();
