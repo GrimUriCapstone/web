@@ -38,6 +38,19 @@ export function ContentPadding({
   );
 }
 
+export const contentPaddingXStyle = css`
+  padding-left: 10px;
+  padding-right: 10px;
+  ${mq.sm} {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  ${mq.md} {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+`;
+
 export function Page({
   children,
   className,

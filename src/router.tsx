@@ -1,5 +1,6 @@
 import {
   DIARY_PAGE_PATH,
+  NOTI_PAGE_PATH,
   SETTINGS_PAGE_PATH,
   SIGNUP_PAGE_PATH,
   WRITE_PAGE_PATH,
@@ -13,6 +14,7 @@ import { WritePage } from "@presentation/writePage/WritePage";
 import { AuthProivder } from "@presentation/providers/AuthProvider";
 import { createBrowserRouter } from "react-router-dom";
 import { DiaryDetailPage } from "@presentation/diaryDetailPage/DiaryDetailPage";
+import { NotiPage } from "@presentation/notiPage/NotiPage";
 export const router = createBrowserRouter([
   {
     element: <AuthProivder />,
@@ -45,7 +47,10 @@ export const router = createBrowserRouter([
         path: `${DIARY_PAGE_PATH}/:diaryId`,
         element: <DiaryDetailPage />,
       },
-
+      {
+        path: NOTI_PAGE_PATH,
+        element: <NotiPage />,
+      },
       { path: SETTINGS_PAGE_PATH, element: <SettingsPage /> },
     ],
   },

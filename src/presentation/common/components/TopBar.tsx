@@ -1,20 +1,14 @@
-import { HOME_PAGE_PATH, SETTINGS_PAGE_PATH } from "@domain/constants/paths";
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Typography,
-  css,
-  useTheme,
-} from "@mui/material";
+import { HOME_PAGE_PATH } from "@domain/constants/paths";
+import { IconButton, Typography, css } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import SettingsIcon from "@mui/icons-material/Settings";
 import { type ReactElement } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ToolBarPadding,
+  contentPaddingXStyle,
   pageWidthStyle,
 } from "@presentation/common/atomics/PageContent";
+import { centerColStyle } from "../styles/commonStyles";
 
 interface TopBarProps {
   title?: string;
@@ -29,60 +23,37 @@ export function TopBar({
   return (
     <>
       <ToolBarPadding />
-      <AppBar
+      <div
         css={css`
           ${pageWidthStyle};
           right: auto;
+          position: fixed;
+          top: 0px;
+          height: 56px;
+          ${centerColStyle}
         `}
       >
-        <Toolbar variant="dense">
+        <div
+          css={css`
+            position: absolute;
+            left: 0px;
+            ${contentPaddingXStyle}
+          `}
+        >
           <IconButton
+            css={css``}
             onClick={() => {
               navigate(to);
             }}
           >
             <ArrowBackIosIcon />
           </IconButton>
-          <Typography variant="h6" component="div">
-            {title}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </>
-  );
-}
+        </div>
 
-export function MainTopBar(): ReactElement {
-  return (
-    <>
-      <ToolBarPadding />
-      <AppBar
-        css={css`
-          ${pageWidthStyle};
-          right: auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 56px;
-        `}
-      >
         <Typography variant="h6" component="div">
-          그림우리
+          {title}
         </Typography>
-        <Toolbar
-          variant="dense"
-          css={css`
-            position: absolute;
-            right: 0px;
-          `}
-        >
-          <Link to={SETTINGS_PAGE_PATH}>
-            <IconButton>
-              <SettingsIcon />
-            </IconButton>
-          </Link>
-        </Toolbar>
-      </AppBar>
+      </div>
     </>
   );
 }
