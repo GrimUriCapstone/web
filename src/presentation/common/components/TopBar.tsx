@@ -1,10 +1,12 @@
-import { HOME_PAGE_PATH } from "@domain/constants/paths";
+import { HOME_PAGE_PATH, SETTINGS_PAGE_PATH } from "@domain/constants/paths";
 import { AppBar, IconButton, Toolbar, Typography, css } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { type ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ToolBarPadding,
+  contentPaddingXStyle,
   pageWidthStyle,
 } from "@presentation/common/atomics/PageContent";
 
@@ -38,6 +40,42 @@ export function TopBar({
           <Typography variant="h6" component="div">
             {title}
           </Typography>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+}
+
+export function MainTopBar(): ReactElement {
+  return (
+    <>
+      <ToolBarPadding />
+      <AppBar
+        css={css`
+          ${pageWidthStyle};
+          ${contentPaddingXStyle}
+          right: auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 56px;
+        `}
+      >
+        <Typography variant="h6" component="div">
+          그림우리
+        </Typography>
+        <Toolbar
+          variant="dense"
+          css={css`
+            position: absolute;
+            right: 0px;
+          `}
+        >
+          <Link to={SETTINGS_PAGE_PATH}>
+            <IconButton>
+              <SettingsIcon />
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
     </>
