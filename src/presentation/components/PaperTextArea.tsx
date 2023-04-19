@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { centerStyle } from "@presentation/atomics/styles/commonStyles";
+import { centerStyle } from "@presentation/common/styles/commonStyles";
 import { type ReactElement } from "react";
 
 interface PaperTextAreaProps {

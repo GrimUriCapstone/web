@@ -3,7 +3,7 @@ import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToolBarPadding } from "@presentation/atomics/Padding";
+import { ToolBarPadding } from "@presentation/common/atomics/Padding";
 
 interface TopBarProps {
   title: string;

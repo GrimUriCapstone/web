@@ -2,9 +2,9 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { useUserStore } from "@data/utils/useUser";
 import { css } from "@emotion/react";
 import { AppBar, Avatar, Typography } from "@mui/material";
-import { Img } from "@presentation/atomics/Image";
+import { Img } from "@presentation/common/atomics/Image";
 
-import { ContentPadding } from "@presentation/atomics/Padding";
+import { ContentPadding } from "@presentation/common/atomics/Padding";
 import { BottonNavigationBar } from "@presentation/components/BottomNavigationBar";
 import {
   DiaryThumnailsSkeleton,

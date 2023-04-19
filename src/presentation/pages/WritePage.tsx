@@ -2,12 +2,12 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
-import { ContentPadding } from "@presentation/atomics/Padding";
+import { ContentPadding } from "@presentation/common/atomics/Padding";
 import {
   centerColStyle,
   centerStyle,
   sectionGapStyle,
-} from "@presentation/atomics/styles/commonStyles";
+} from "@presentation/common/styles/commonStyles";
 import { LoadingModal } from "@presentation/components/LoadingModal";
 import { PaperTextArea } from "@presentation/components/PaperTextArea";
 import { TopBar } from "@presentation/components/TopBar";

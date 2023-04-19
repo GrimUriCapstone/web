@@ -2,7 +2,7 @@ import { useUserRepository } from "@data/repository/userRepository";
 import { signOut } from "@data/utils/useAuth";
 import { useUserStore } from "@data/utils/useUser";
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
-import { ContentPadding } from "@presentation/atomics/Padding";
+import { ContentPadding } from "@presentation/common/atomics/Padding";
 import { LoadingModal } from "@presentation/components/LoadingModal";
 import { TopBar } from "@presentation/components/TopBar";
 import { useMutation } from "@tanstack/react-query";

@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import { Skeleton } from "@mui/material";
 import { type ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { Img } from "@presentation/atomics/Image";
+import { Img } from "@presentation/common/atomics/Image";
 export interface DiaryThumnailProps {
   diary: Diary;
 }
