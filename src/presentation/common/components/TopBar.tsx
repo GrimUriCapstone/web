@@ -1,6 +1,6 @@
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { IconButton, Typography, css } from "@mui/material";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -29,6 +29,7 @@ export function TopBar({
           right: auto;
           position: fixed;
           top: 0px;
+          z-index: 2;
           height: 56px;
           ${centerColStyle}
         `}
@@ -46,13 +47,54 @@ export function TopBar({
               navigate(to);
             }}
           >
-            <ArrowBackIosIcon />
+            <ArrowBackIcon />
           </IconButton>
         </div>
 
         <Typography variant="h6" component="div">
           {title}
         </Typography>
+      </div>
+    </>
+  );
+}
+
+export function AbsoluteTobBar({
+  title = "",
+  to = HOME_PAGE_PATH,
+}: TopBarProps): ReactElement {
+  const navigate = useNavigate();
+  return (
+    <>
+      <div
+        css={css`
+          ${pageWidthStyle};
+          right: auto;
+          z-index: 2;
+          position: fixed;
+          top: 0px;
+          height: 56px;
+          ${centerColStyle}
+        `}
+      >
+        <div
+          css={css`
+            position: absolute;
+            left: 0px;
+            ${contentPaddingXStyle}
+          `}
+        >
+          <IconButton
+            css={css`
+              background-color: #f0f8ff85;
+            `}
+            onClick={() => {
+              navigate(to);
+            }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        </div>
       </div>
     </>
   );
