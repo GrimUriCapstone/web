@@ -4,6 +4,7 @@ import {
   useAuthInitStore,
   signOut,
 } from "@data/stores/authStore";
+import { Button } from "@mui/material";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { TopBar } from "@presentation/common/components/TopBar";
@@ -14,24 +15,24 @@ function AuthSetting(): ReactElement {
   return (
     <div>
       {accessToken == null ? (
-        <button
+        <Button
+          variant="contained"
           onClick={() => {
             signInWithGoogle();
           }}
-          className="btn btn-block"
         >
           로그인
-        </button>
+        </Button>
       ) : (
         <>
-          <button
+          <Button
+            variant="outlined"
             onClick={() => {
               signOut();
             }}
-            className="btn btn-block"
           >
             로그아웃
-          </button>
+          </Button>
         </>
       )}
     </div>
