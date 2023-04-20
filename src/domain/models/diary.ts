@@ -5,7 +5,7 @@ export interface Diary {
   imageSelected: boolean;
   tags: Tag[];
   candidateImageUrls: Photo[];
-  mainImageUrl: Photo[];
+  mainImageUrl: Photo;
 }
 
 export interface Tag {

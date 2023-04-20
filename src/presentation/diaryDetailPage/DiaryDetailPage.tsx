@@ -20,7 +20,7 @@ export function DiaryDetailPage(): ReactElement {
   const { getDiary } = useDirayRepository();
 
   const { showSnackbar } = notificationStore();
-  const { data, isLoading } = useQuery(
+  const { data: diary, isLoading } = useQuery(
     ["getDiary"],
     async () => {
       const id = parseNumber(diaryId);
@@ -50,11 +50,13 @@ export function DiaryDetailPage(): ReactElement {
   const openModal = (): void => {
     setExpand(true);
   };
+  if (isLoading) {
+    return <LoadingModal />;
+  }
   return (
     <>
-      {isLoading && <LoadingModal />}
       <AbsoluteTobBar to={DIARY_PAGE_PATH} />
-      <Img src={""} css={diaryImageStyle} />
+      <Img src={diary!.mainImageUrl.imageUrl} css={diaryImageStyle} />
       <ContentPadding
         css={css`
           position: relative;
@@ -70,7 +72,7 @@ export function DiaryDetailPage(): ReactElement {
           `}
         >
           <div />
-          <Typography variant="h5">{data?.title}</Typography>
+          <Typography variant="h5">{diary?.title}</Typography>
           <IconButton onClick={openModal}>
             <ExpandLessIcon />
           </IconButton>
@@ -84,13 +86,13 @@ export function DiaryDetailPage(): ReactElement {
             overflow-y: hidden;
           `}
         >
-          {data?.originalContent}
+          {diary?.originalContent}
         </pre>
       </ContentPadding>
       {expand && (
         <DiaryModal
-          content={data?.originalContent}
-          title={data?.title}
+          content={diary?.originalContent}
+          title={diary?.title}
           onClick={closeModal}
         />
       )}

@@ -25,7 +25,7 @@ export function DiaryPage(): ReactElement {
         if (diary.imageSelected) {
           return true;
         }
-        return true;
+        return false;
       });
     },
     {
