@@ -46,6 +46,7 @@ export function DiaryPage(): ReactElement {
 
 const diaryThumnailContainerStyle = css`
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 10px;
   column-gap: 10px;

@@ -17,6 +17,7 @@ export function DiaryThumnail({ diary }: DiaryThumnailProps): ReactElement {
         css={css`
           object-fit: contain;
           border-radius: 16px;
+          width: 100%;
         `}
         src={""}
       />
