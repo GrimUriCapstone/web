@@ -1,6 +1,6 @@
 import { useUserRepository } from "@data/repository/userRepository";
-import { signOut } from "@data/utils/useAuth";
-import { useUserStore } from "@data/utils/useUser";
+import { signOut } from "@data/stores/authStore";
+import { useUserStore } from "@data/stores/userStore";
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";

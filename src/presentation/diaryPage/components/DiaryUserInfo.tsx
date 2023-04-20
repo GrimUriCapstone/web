@@ -1,4 +1,4 @@
-import { useUserStore } from "@data/utils/useUser";
+import { useUserStore } from "@data/stores/userStore";
 import { type User } from "@domain/models/user";
 import { css } from "@emotion/react";
 import { Avatar, Typography } from "@mui/material";

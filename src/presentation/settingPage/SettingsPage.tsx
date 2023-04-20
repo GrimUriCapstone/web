@@ -3,7 +3,7 @@ import {
   signOut,
   useAuthInitStore,
   useAuthStore,
-} from "@data/utils/useAuth";
+} from "@data/stores/authStore";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { TopBar } from "@presentation/common/components/TopBar";

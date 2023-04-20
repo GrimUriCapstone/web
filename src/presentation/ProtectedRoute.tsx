@@ -1,4 +1,4 @@
-import { useAuthStore } from "@data/utils/useAuth";
+import { useAuthStore } from "@data/stores/authStore";
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
 
 import { useEffect, type ReactElement, type ReactNode } from "react";

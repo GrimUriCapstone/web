@@ -1,5 +1,5 @@
 import { Alert, Snackbar, css } from "@mui/material";
-import { notificationStore } from "@presentation/stores/notificationStore";
+import { notificationStore } from "@data/stores/notificationStore";
 
 import { useState, type ReactElement } from "react";
 

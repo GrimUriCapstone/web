@@ -1,12 +1,12 @@
 import { useUserRepository } from "@data/repository/userRepository";
-import { signOut, useAuthStore } from "@data/utils/useAuth";
-import { useUserStore } from "@data/utils/useUser";
+import { signOut, useAuthStore } from "@data/stores/authStore";
+import { useUserStore } from "@data/stores/userStore";
 
 import { SIGNUP_PAGE_PATH } from "@domain/constants/paths";
 import { NotFound } from "@domain/errors/NotFound";
 import { UnAuthorized } from "@domain/errors/UnAuthorized";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
-import { notificationStore } from "@presentation/stores/notificationStore";
+import { notificationStore } from "@data/stores/notificationStore";
 
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, type ReactElement } from "react";

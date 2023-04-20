@@ -1,4 +1,4 @@
-import { useApi } from "@data/utils/useApi";
+import { useApi } from "@data/hooks/useApi";
 import { NotFound } from "@domain/errors/NotFound";
 import { UnKnown } from "@domain/errors/UnKnown";
 import { type User } from "@domain/models/user";

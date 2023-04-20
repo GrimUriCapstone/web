@@ -2,7 +2,7 @@ import { UnAuthorized } from "@domain/errors/UnAuthorized";
 
 import axios, { type AxiosInstance } from "axios";
 import { useEffect } from "react";
-import { useAuthStore } from "./useAuth";
+import { useAuthStore } from "../stores/authStore";
 
 const { VITE_SERVER_URL } = import.meta.env;
 interface UseCustomClientReturns {
