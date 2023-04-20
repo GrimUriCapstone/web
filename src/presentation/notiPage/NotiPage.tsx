@@ -1,7 +1,6 @@
 import { useDirayRepository } from "@data/repository/diaryRepository";
 import { notificationStore } from "@data/stores/notificationStore";
 import { type Diary } from "@domain/models/diary";
-import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { TopBar } from "@presentation/common/components/TopBar";
 import { useQuery } from "@tanstack/react-query";
 import { type ReactElement } from "react";
@@ -34,13 +33,10 @@ export function NotiPage(): ReactElement {
   return (
     <>
       <TopBar title="알림" />
-      <ContentPadding>
-        {isLoading &&
-          new Array(5).map((_) => <SelectImageNotiSkelton key={_} />)}
-        {diaries?.map((diary) => {
-          return <SelectImageNoti diary={diary} key={diary.diaryId} />;
-        })}
-      </ContentPadding>
+      {isLoading && new Array(5).map((_) => <SelectImageNotiSkelton key={_} />)}
+      {diaries?.map((diary) => {
+        return <SelectImageNoti diary={diary} key={diary.diaryId} />;
+      })}
     </>
   );
 }

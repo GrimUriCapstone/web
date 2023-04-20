@@ -1,6 +1,7 @@
 import {
   DIARY_PAGE_PATH,
   NOTI_PAGE_PATH,
+  SELECT_PAGE_PATH,
   SETTINGS_PAGE_PATH,
   SIGNUP_PAGE_PATH,
   WRITE_PAGE_PATH,
@@ -16,6 +17,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { DiaryDetailPage } from "@presentation/diaryDetailPage/DiaryDetailPage";
 import { NotiPage } from "@presentation/notiPage/NotiPage";
 import { SnackbarProvider } from "@presentation/providers/SnackbarProvider";
+import { SelectPage } from "@presentation/selectPage/SelectPage";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +65,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <NotiPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: `${SELECT_PAGE_PATH}/:diaryId`,
+        element: (
+          <ProtectedRoute>
+            <SelectPage />
           </ProtectedRoute>
         ),
       },

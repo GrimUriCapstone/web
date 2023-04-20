@@ -3,17 +3,20 @@ import { css } from "@emotion/react";
 import { mq } from "@presentation/common/theme/mediaQuery";
 import { type ReactElement } from "react";
 import { FadeImages } from "./FadeImage";
-import { Skeleton } from "@mui/material";
-import { Link } from "react-router-dom";
+import { ListItemButton, Skeleton } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import { SELECT_PAGE_PATH } from "@domain/constants/paths";
 
 interface SelectImageNotiProps {
   diary: Diary;
 }
 export function SelectImageNoti({ diary }: SelectImageNotiProps): ReactElement {
+  const navigate = useNavigate();
   return (
-    <Link
-      to={`${SELECT_PAGE_PATH}/${diary.diaryId}`}
+    <ListItemButton
+      onClick={() => {
+        navigate(`${SELECT_PAGE_PATH}/${diary.diaryId}`);
+      }}
       css={selectImageNotiContainerStyles}
     >
       <FadeImages candidateImageUrls={diary.candidateImageUrls} />
@@ -42,7 +45,7 @@ export function SelectImageNoti({ diary }: SelectImageNotiProps): ReactElement {
           {diary.title}
         </p>
       </div>
-    </Link>
+    </ListItemButton>
   );
 }
 
@@ -73,19 +76,12 @@ const selectImageNotiContainerStyles = css`
   color: black;
   grid-template-columns: 2fr 8fr;
   gap: 10px;
-  padding-bottom: 10px;
+  padding: 10px 20px;
   align-items: center;
   ${mq.sm} {
-    padding-bottom: 15px;
+    padding: 15px 20px;
   }
-  &::before {
-    content: "";
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    transform: scale(120%);
-    border-bottom: solid 1px lightgray;
-  }
+  border-bottom: solid 1px lightgray;
 `;
 const selectImageNotiDetailStyles = css`
   height: 100%;
