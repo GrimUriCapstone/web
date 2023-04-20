@@ -64,10 +64,10 @@ export function Page({
         height: 100%;
         width: 100%;
         ${mq.sm} {
-          width: 600px;
+          width: 480px;
         }
         ${mq.md} {
-          width: 900px;
+          width: 480px;
         }
       `}
     >
@@ -80,10 +80,10 @@ export function Page({
 export const pageWidthStyle = css`
   width: 100%;
   ${mq.sm} {
-    width: 600px;
+    width: 480px;
   }
   ${mq.lg} {
-    width: 900px;
+    width: 480px;
   }
 `;
 export function ToolBarPadding(): ReactElement {
