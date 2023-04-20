@@ -15,9 +15,16 @@ import { AuthProivder } from "@presentation/providers/AuthProvider";
 import { createBrowserRouter } from "react-router-dom";
 import { DiaryDetailPage } from "@presentation/diaryDetailPage/DiaryDetailPage";
 import { NotiPage } from "@presentation/notiPage/NotiPage";
+import { SnackbarProvider } from "@presentation/providers/SnackbarProvider";
+
 export const router = createBrowserRouter([
   {
-    element: <AuthProivder />,
+    element: (
+      <>
+        <AuthProivder />
+        <SnackbarProvider />
+      </>
+    ),
     children: [
       {
         path: "/",
