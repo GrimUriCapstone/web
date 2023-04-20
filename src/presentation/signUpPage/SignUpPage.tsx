@@ -1,5 +1,6 @@
 import { useUserRepository } from "@data/repository/userRepository";
 import { signOut } from "@data/stores/authStore";
+import { notificationStore } from "@data/stores/notificationStore";
 import { useUserStore } from "@data/stores/userStore";
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
@@ -14,13 +15,16 @@ function SignUpForm(): ReactElement {
   const { setUser } = useUserStore();
   const navigate = useNavigate();
   const { postUserSignUp } = useUserRepository();
+  const { showSnackbar } = notificationStore();
   const { mutate, isLoading, isError } = useMutation(postUserSignUp, {
     onSuccess: (data) => {
       setUser(data);
       navigate(HOME_PAGE_PATH);
     },
     onError: () => {
-      alert("회원가입 실패!");
+      showSnackbar({
+        snackbarConf: { variant: "error", message: "회원가입 실패" },
+      });
     },
   });
   const handleSubmit = (): void => {

@@ -19,6 +19,7 @@ export function AuthProivder(): ReactElement {
   const { getUserInfo } = useUserRepository();
   const { showSnackbar } = notificationStore();
   const navigate = useNavigate();
+
   const { isLoading, mutate } = useMutation({
     mutationFn: async () => {
       if (accessToken == null || needSignUp) {
@@ -40,6 +41,12 @@ export function AuthProivder(): ReactElement {
       if (error instanceof NotFound) {
         useUserStore.setState({ needSignUp: true });
         navigate(SIGNUP_PAGE_PATH);
+        showSnackbar({
+          snackbarConf: {
+            variant: "info",
+            message: "존재하지 않는 유저. 회원가입",
+          },
+        });
         return;
       }
       signOut();

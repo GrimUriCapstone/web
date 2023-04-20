@@ -1,4 +1,5 @@
 import { useDirayRepository } from "@data/repository/diaryRepository";
+import { notificationStore } from "@data/stores/notificationStore";
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
@@ -17,12 +18,15 @@ export function WritePage(): ReactElement {
   const [title, setTitle] = useState("");
   const navigate = useNavigate();
   const { postDiary } = useDirayRepository();
-  const { mutate, isLoading, isError } = useMutation(postDiary, {
+  const { showSnackbar } = notificationStore();
+  const { mutate, isLoading } = useMutation(postDiary, {
     onSuccess: () => {
       navigate(HOME_PAGE_PATH);
     },
     onError: () => {
-      alert("작성 실패!");
+      showSnackbar({
+        snackbarConf: { variant: "error", message: "작성 실패" },
+      });
     },
   });
   const handlePost = (): void => {

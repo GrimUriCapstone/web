@@ -12,13 +12,16 @@ import { mq } from "@presentation/common/theme/mediaQuery";
 import { useQuery } from "@tanstack/react-query";
 import { type ReactElement } from "react";
 import { DiaryUserInfo } from "./components/DiaryUserInfo";
+import { notificationStore } from "@data/stores/notificationStore";
 
 export function DiaryPage(): ReactElement {
   const { getDiaries } = useDirayRepository();
-
+  const { showSnackbar } = notificationStore();
   const { data: diaries, isLoading } = useQuery(["getDiaries"], getDiaries, {
-    onError: (err) => {
-      console.warn(err);
+    onError: () => {
+      showSnackbar({
+        snackbarConf: { variant: "error", message: "다이어리 가져오기 실패" },
+      });
     },
   });
 
