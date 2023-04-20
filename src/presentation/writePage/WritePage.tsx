@@ -22,6 +22,9 @@ export function WritePage(): ReactElement {
   const { mutate, isLoading } = useMutation(postDiary, {
     onSuccess: () => {
       navigate(HOME_PAGE_PATH);
+      showSnackbar({
+        snackbarConf: { variant: "success", message: "작성 성공" },
+      });
     },
     onError: () => {
       showSnackbar({
@@ -31,11 +34,12 @@ export function WritePage(): ReactElement {
   });
   const handlePost = (): void => {
     if (content.length > 1000 || content.length === 0) {
-      alert("내용을 채워주세요");
+      showSnackbar({
+        snackbarConf: { variant: "info", message: "내용을 채워주세요" },
+      });
       return;
     }
     mutate({ content, title });
-    alert("작성 성공");
   };
   return (
     <>
