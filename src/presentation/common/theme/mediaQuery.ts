@@ -1,5 +1,5 @@
 /**
- * sm: @media (min-width: 600px)
+ * sm: @media (min-width: 480px)
  * md: @media (min-width: 900px)
  * lg: @media (min-width: 1200px)
  */
