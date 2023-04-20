@@ -11,8 +11,6 @@ import { useEffect, type ReactElement, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { DiaryModal } from "./components/DiaryModal";
-import { mq } from "@presentation/common/theme/mediaQuery";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { notificationStore } from "@data/stores/notificationStore";
 import { AbsoluteTobBar } from "@presentation/common/components/TopBar";
 export function DiaryDetailPage(): ReactElement {

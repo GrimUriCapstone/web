@@ -7,7 +7,7 @@ import { Global, css } from "@emotion/react";
 import reset from "emotion-reset";
 import { teal } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Page, pageStyle } from "@presentation/common/atomics/PageContent";
+import { Page } from "@presentation/common/atomics/PageContent";
 export function App(): ReactElement {
   const theme = createTheme({
     palette: {

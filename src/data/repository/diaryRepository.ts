@@ -5,6 +5,7 @@ interface DiaryRepository {
   postDiary: ({ title, content }: PostDiaryProps) => Promise<boolean>;
   getDiaries: () => Promise<Diary[]>;
   getDiary: (diaryId: number) => Promise<Diary>;
+  postMainImage: (diaryId: number, imageId: number) => Promise<void>;
 }
 
 interface PostDiaryProps {
@@ -31,5 +32,12 @@ export const useDirayRepository = (): DiaryRepository => {
     const result = await authApi.get(`/diary/${diaryId}`);
     return result.data;
   };
-  return { postDiary, getDiaries, getDiary };
+
+  const postMainImage = async (
+    diaryId: number,
+    imageId: number
+  ): Promise<void> => {
+    await authApi.post(`/diary/${diaryId}/image/${imageId}`);
+  };
+  return { postDiary, getDiaries, getDiary, postMainImage };
 };
