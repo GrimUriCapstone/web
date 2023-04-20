@@ -23,7 +23,7 @@ export function SignUpForm(): ReactElement {
   const navigate = useNavigate();
   const { postUserSignUp } = useUserRepository();
   const { showSnackbar } = notificationStore();
-  const { mutate, isLoading, isError } = useMutation(postUserSignUp, {
+  const { mutate, isLoading } = useMutation(postUserSignUp, {
     onSuccess: (data) => {
       setUser(data);
       navigate(HOME_PAGE_PATH);
@@ -68,6 +68,7 @@ export function SignUpForm(): ReactElement {
           <Checkbox />
           <label>
             <Link
+              target="_blank"
               to={
                 "https://meadow-locust-124.notion.site/b6efb378d4ab485a8f7c11551b8ced13"
               }
@@ -82,6 +83,7 @@ export function SignUpForm(): ReactElement {
           <Checkbox />
           <label>
             <Link
+              target="_blank"
               to={
                 "https://meadow-locust-124.notion.site/196322b07bc24a0db86ad9ee74d3ee66"
               }

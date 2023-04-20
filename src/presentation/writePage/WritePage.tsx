@@ -33,7 +33,7 @@ export function WritePage(): ReactElement {
     },
   });
   const handlePost = (): void => {
-    if (content.length > 1000 || content.length === 0) {
+    if (content.length > 300 || content.length === 0) {
       showSnackbar({
         snackbarConf: { variant: "info", message: "내용을 채워주세요" },
       });
@@ -58,7 +58,7 @@ export function WritePage(): ReactElement {
             gap: 10px;
           `}
         >
-          <div>{content.length}/1000자</div>
+          <div>{content.length}/300자</div>
           <Button
             variant="contained"
             css={css`

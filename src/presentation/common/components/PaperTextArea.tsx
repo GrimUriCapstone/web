@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { TextField } from "@mui/material";
 import { centerStyle } from "@presentation/common/styles/commonStyles";
 import { type ReactElement } from "react";
 
@@ -8,7 +9,6 @@ interface PaperTextAreaProps {
   title: string;
   setTitle: (value: string) => void;
 }
-// 출처 : https://codepen.io/MarcMalignan/pen/QbaXGg
 export function PaperTextArea({
   content,
   setContent,
@@ -20,30 +20,29 @@ export function PaperTextArea({
       <div
         css={css`
           ${centerStyle}
-          margin: 45px 0px 45px 0px;
         `}
       >
-        <input
+        <TextField
           css={diaryTitleStyles}
-          placeholder="제목을 입력해 주세요."
+          label={"일기 제목"}
           value={title}
+          autoFocus
+          variant="standard"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
         />
       </div>
-      <div css={diaryContentContainerStyles}>
-        <textarea
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
-          value={content}
-          maxLength={1000}
-          placeholder="당신의 생각을 글로 표현해 주세요."
-          autoFocus
-          css={diaryContentStyles}
-        />
-      </div>
+      <TextField
+        onChange={(e) => {
+          setContent(e.target.value);
+        }}
+        value={content}
+        label="당신의 생각을 글로 표현해 주세요"
+        multiline={true}
+        css={diaryContentStyles}
+        inputProps={{ maxLength: 300 }}
+      />
     </div>
   );
 }
@@ -58,74 +57,33 @@ export function PaperArea({ content, title }: PaperAreaProps): ReactElement {
       <div
         css={css`
           ${centerStyle}
-          margin: 45px 0px 45px 0px;
         `}
       >
         <p css={diaryTitleStyles}>{title}</p>
       </div>
-      <div css={diaryContentContainerStyles}>
-        <pre css={diaryContentStyles}>{content}</pre>
-      </div>
+      <pre css={diaryContentStyles}>{content}</pre>
     </div>
   );
 }
 
 const paperStyles = css`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
   width: 100%;
-  min-width: 200px;
-  height: 80vh;
-  background: #fafafa;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  &::before {
-    height: 5000px;
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 45px;
-    background: radial-gradient(#575450 6px, transparent 7px) repeat-y;
-    background-size: 30px 30px;
-    border-right: 3px solid #d44147;
-  }
-  padding-left: 45px;
+  flex: 1;
+  height: 100%;
 `;
 
 const diaryTitleStyles = css`
   text-align: center;
-  max-width: 400px;
   width: 100%;
-  min-width: 200px;
-  border-bottom: #91d1d3 3px solid;
-  background-color: transparent;
-  outline: none;
-  line-height: 30px;
-  font-weight: bold;
-  font-size: 20px;
+  margin: 0px 20px;
+  font-size: 100px;
 `;
 
 const diaryContentStyles = css`
-  text-indent: 18px;
   width: 100%;
-  height: 100%;
-  line-height: 30px;
-  padding: 0 10px;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  font-weight: bold;
-  font-size: 18px;
-  z-index: 1;
-  resize: none;
-  white-space: pre-wrap;
-`;
-
-const diaryContentContainerStyles = css`
-  height: 100%;
-  margin: 30px 0px 30px 0px;
-  background: linear-gradient(transparent, transparent 28px, #91d1d3 28px);
-  background-size: 30px 30px;
+  /* background: linear-gradient(transparent, transparent 19px, #91d1d3 19px);
+  background-size: 20px 20px; */
 `;

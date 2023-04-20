@@ -31,7 +31,9 @@ export function TopBar({
           top: 0px;
           z-index: 2;
           height: 56px;
-          ${centerColStyle}
+          background-color: white;
+          box-shadow: 0px 3px 6px -6px gray;
+          ${centerColStyle};
         `}
       >
         <div
