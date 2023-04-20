@@ -55,9 +55,4 @@ const diaryThumnailContainerStyle = css`
     row-gap: 15px;
     column-gap: 15px;
   }
-  ${mq.md} {
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: 20px;
-    column-gap: 20px;
-  }
 `;

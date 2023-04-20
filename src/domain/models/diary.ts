@@ -4,8 +4,8 @@ export interface Diary {
   originalContent: string;
   imageSelected: boolean;
   tags: Tag[];
-  candidateImageUrls: Image[];
-  mainImageUrl: Image[];
+  candidateImageUrls: Photo[];
+  mainImageUrl: Photo[];
 }
 
 export interface Tag {
@@ -13,7 +13,7 @@ export interface Tag {
   korTag: string;
 }
 
-export interface Image {
+export interface Photo {
   imageId: number;
   imageUrl: string;
 }

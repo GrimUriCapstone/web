@@ -27,10 +27,6 @@ export function ContentPadding({
           padding: 20px 20px 20px 20px;
           gap: 15px;
         }
-        ${mq.md} {
-          padding: 20px 30px 20px 30px;
-          gap: 20px;
-        }
       `}
     >
       {children}
@@ -44,10 +40,6 @@ export const contentPaddingXStyle = css`
   ${mq.sm} {
     padding-left: 20px;
     padding-right: 20px;
-  }
-  ${mq.md} {
-    padding-left: 30px;
-    padding-right: 30px;
   }
 `;
 
@@ -66,9 +58,6 @@ export function Page({
         ${mq.sm} {
           width: 480px;
         }
-        ${mq.md} {
-          width: 480px;
-        }
       `}
     >
       {children}
@@ -80,9 +69,6 @@ export function Page({
 export const pageWidthStyle = css`
   width: 100%;
   ${mq.sm} {
-    width: 480px;
-  }
-  ${mq.lg} {
     width: 480px;
   }
 `;
