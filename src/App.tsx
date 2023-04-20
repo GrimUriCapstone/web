@@ -29,9 +29,9 @@ export function App(): ReactElement {
             body,
             #root {
               width: 100%;
-              height: 100%;
-              overflow: hidden;
-              background-color: gray;
+              min-height: 100vh;
+              overflow-x: hidden;
+              background-color: #eeeeee;
             }
           `}
         />

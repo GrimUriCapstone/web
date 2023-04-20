@@ -53,7 +53,7 @@ export function Page({
       css={css`
         background-color: white;
         margin: 0 auto;
-        height: 100%;
+        min-height: 100vh;
         width: 100%;
         ${mq.sm} {
           width: 480px;
@@ -68,6 +68,7 @@ export function Page({
 
 export const pageWidthStyle = css`
   width: 100%;
+
   ${mq.sm} {
     width: 480px;
   }
