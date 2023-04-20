@@ -2,6 +2,7 @@ import { Backdrop, IconButton, Typography, css } from "@mui/material";
 import { ContentPadding, Page } from "@presentation/common/atomics/PageContent";
 import { type ReactElement } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { centerColStyle } from "@presentation/common/styles/commonStyles";
 interface DiaryModalProps {
   title?: string;
   content?: string;
@@ -20,12 +21,15 @@ export function DiaryModal({
         z-index: 2;
         border: 0px;
         padding-top: 100px;
+        ${centerColStyle}
       `}
     >
       <ContentPadding
         css={css`
           background-color: white;
           border-radius: 30px 30px 0px 0px;
+          max-width: 480px;
+          position: relative;
         `}
       >
         <IconButton
@@ -43,7 +47,7 @@ export function DiaryModal({
             width: 100%;
             white-space: pre-wrap;
             text-indent: 10px;
-            height: 110%;
+            line-height: 150%;
             overflow-y: scroll;
           `}
         >

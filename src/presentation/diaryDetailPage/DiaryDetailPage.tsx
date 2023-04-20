@@ -18,7 +18,11 @@ export function DiaryDetailPage(): ReactElement {
   const { getDiary } = useDirayRepository();
 
   const { showSnackbar } = notificationStore();
-  const { data: diary, isLoading } = useQuery(
+  const {
+    data: diary,
+    isLoading,
+    isError,
+  } = useQuery(
     ["getDiary"],
     async () => {
       const id = parseNumber(diaryId);
@@ -51,6 +55,12 @@ export function DiaryDetailPage(): ReactElement {
   if (isLoading) {
     return <LoadingModal />;
   }
+  if (isError) {
+    <>
+      <AbsoluteTobBar to={DIARY_PAGE_PATH} />
+      <ContentPadding>에러 발생</ContentPadding>
+    </>;
+  }
   return (
     <>
       <AbsoluteTobBar to={DIARY_PAGE_PATH} />
@@ -81,6 +91,7 @@ export function DiaryDetailPage(): ReactElement {
             white-space: pre-wrap;
             line-break: anywhere;
             text-indent: 10px;
+            line-height: 150%;
             overflow-y: hidden;
           `}
         >

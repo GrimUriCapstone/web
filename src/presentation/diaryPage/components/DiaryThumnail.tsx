@@ -19,7 +19,7 @@ export function DiaryThumnail({ diary }: DiaryThumnailProps): ReactElement {
           border-radius: 16px;
           width: 100%;
         `}
-        src={""}
+        src={diary.mainImageUrl.imageUrl}
       />
     </Link>
   );
