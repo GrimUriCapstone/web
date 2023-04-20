@@ -1,5 +1,7 @@
 import { useAuthStore } from "@data/stores/authStore";
-import { HOME_PAGE_PATH } from "@domain/constants/paths";
+import { notificationStore } from "@data/stores/notificationStore";
+import { useUserStore } from "@data/stores/userStore";
+import { HOME_PAGE_PATH, SETTINGS_PAGE_PATH } from "@domain/constants/paths";
 
 import { useEffect, type ReactElement, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,10 +14,15 @@ export function ProtectedRoute({
   children,
 }: ProtectedRouteProps): ReactElement {
   const { accessToken } = useAuthStore();
+  const { user } = useUserStore();
+  const { showSnackbar } = notificationStore();
   const navigate = useNavigate();
   useEffect((): void => {
-    if (accessToken == null) {
-      navigate(HOME_PAGE_PATH);
+    if (accessToken == null || user == null) {
+      navigate(SETTINGS_PAGE_PATH);
+      showSnackbar({
+        snackbarConf: { variant: "warning", message: "로그인 해주세요" },
+      });
     }
   }, []);
 

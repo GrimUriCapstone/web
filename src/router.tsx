@@ -31,32 +31,40 @@ export const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: "/secret",
-        element: (
-          <ProtectedRoute>
-            <div>비밀</div>
-          </ProtectedRoute>
-        ),
-      },
-      {
         path: SIGNUP_PAGE_PATH,
         element: <SignUpPage />,
       },
       {
         path: WRITE_PAGE_PATH,
-        element: <WritePage />,
+        element: (
+          <ProtectedRoute>
+            <WritePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: DIARY_PAGE_PATH,
-        element: <DiaryPage />,
+        element: (
+          <ProtectedRoute>
+            <DiaryPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: `${DIARY_PAGE_PATH}/:diaryId`,
-        element: <DiaryDetailPage />,
+        element: (
+          <ProtectedRoute>
+            <DiaryDetailPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: NOTI_PAGE_PATH,
-        element: <NotiPage />,
+        element: (
+          <ProtectedRoute>
+            <NotiPage />
+          </ProtectedRoute>
+        ),
       },
       { path: SETTINGS_PAGE_PATH, element: <SettingsPage /> },
     ],

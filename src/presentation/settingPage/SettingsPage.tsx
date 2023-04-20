@@ -2,11 +2,11 @@ import {
   useAuthStore,
   signInWithGoogle,
   useAuthInitStore,
+  signOut,
 } from "@data/stores/authStore";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { TopBar } from "@presentation/common/components/TopBar";
-import { signOut } from "firebase/auth";
 import { type ReactElement } from "react";
 
 function AuthSetting(): ReactElement {
