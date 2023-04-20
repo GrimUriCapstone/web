@@ -26,7 +26,7 @@ export const useUserRepository = (): UserRepository => {
           throw new NotFound();
         }
       }
-      throw new UnKnown("un");
+      throw error;
     }
   };
 

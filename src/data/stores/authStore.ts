@@ -1,6 +1,7 @@
+import { auth, googleAuthProvider } from "@data/utils/firebaseInit";
 import { signInWithRedirect, type User as FirebaseUser } from "firebase/auth";
 import { create } from "zustand";
-import { auth, googleAuthProvider } from "../utils/firebaseInit";
+
 import { devtools, persist } from "zustand/middleware";
 
 interface AuthStore {

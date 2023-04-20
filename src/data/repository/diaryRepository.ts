@@ -1,9 +1,5 @@
 import { useApi } from "@data/hooks/useApi";
-import { NotFound } from "@domain/errors/NotFound";
-import { UnKnown } from "@domain/errors/UnKnown";
 import { type Diary } from "@domain/models/diary";
-import { type User } from "@domain/models/user";
-import { AxiosError } from "axios";
 
 interface DiaryRepository {
   postDiary: ({ title, content }: PostDiaryProps) => Promise<boolean>;
