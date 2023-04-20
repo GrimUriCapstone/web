@@ -14,6 +14,7 @@ import { DiaryModal } from "./components/DiaryModal";
 import { mq } from "@presentation/common/theme/mediaQuery";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { notificationStore } from "@data/stores/notificationStore";
+import { AbsoluteTobBar } from "@presentation/common/components/TopBar";
 export function DiaryDetailPage(): ReactElement {
   const { diaryId } = useParams();
   const { getDiary } = useDirayRepository();
@@ -52,9 +53,8 @@ export function DiaryDetailPage(): ReactElement {
   return (
     <>
       {isLoading && <LoadingModal />}
-      <div>
-        <Img src={""} css={diaryImageStyle} />
-      </div>
+      <AbsoluteTobBar to={DIARY_PAGE_PATH} />
+      <Img src={""} css={diaryImageStyle} />
       <ContentPadding
         css={css`
           position: relative;
@@ -69,13 +69,7 @@ export function DiaryDetailPage(): ReactElement {
             justify-content: space-between;
           `}
         >
-          <IconButton
-            onClick={() => {
-              navigate(DIARY_PAGE_PATH);
-            }}
-          >
-            <ArrowBackIosIcon />
-          </IconButton>
+          <div />
           <Typography variant="h5">{data?.title}</Typography>
           <IconButton onClick={openModal}>
             <ExpandLessIcon />
@@ -87,17 +81,16 @@ export function DiaryDetailPage(): ReactElement {
             white-space: pre-wrap;
             line-break: anywhere;
             text-indent: 10px;
-            overflow-y: scroll;
+            overflow-y: hidden;
           `}
         >
-          {data!.originalContent}
+          {data?.originalContent}
         </pre>
-        {/** data!.originalContent */}
       </ContentPadding>
       {expand && (
         <DiaryModal
-          content={data!.originalContent}
-          title={data!.title}
+          content={data?.originalContent}
+          title={data?.title}
           onClick={closeModal}
         />
       )}
@@ -109,9 +102,4 @@ const diaryImageStyle = css`
   margin: 0 auto;
   width: 100%;
   aspect-ratio: 1;
-  max-width: 360px;
-  ${mq.sm} {
-    width: 360px;
-    max-width: 360px;
-  }
 `;
