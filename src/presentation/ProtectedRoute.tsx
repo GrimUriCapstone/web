@@ -1,4 +1,4 @@
-import { useAuthStore } from "@data/stores/authStore";
+import { useAuthInitStore, useAuthStore } from "@data/stores/authStore";
 import { notificationStore } from "@data/stores/notificationStore";
 import { useUserStore } from "@data/stores/userStore";
 import { HOME_PAGE_PATH, SETTINGS_PAGE_PATH } from "@domain/constants/paths";
@@ -16,15 +16,16 @@ export function ProtectedRoute({
   const { accessToken } = useAuthStore();
   const { user } = useUserStore();
   const { showSnackbar } = notificationStore();
+  const { init } = useAuthInitStore();
   const navigate = useNavigate();
   useEffect((): void => {
-    if (accessToken == null || user == null) {
+    if ((accessToken == null || user == null) && init) {
       navigate(SETTINGS_PAGE_PATH);
       showSnackbar({
         snackbarConf: { variant: "warning", message: "로그인 해주세요" },
       });
     }
-  }, []);
+  }, [init]);
 
   return <>{children}</>;
 }
