@@ -5,6 +5,7 @@ import { Skeleton } from "@mui/material";
 import { type ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Img } from "@presentation/common/atomics/Image";
+import { hoverActiveStyle } from "@presentation/common/styles/commonStyles";
 export interface DiaryThumnailProps {
   diary: Diary;
 }
@@ -12,7 +13,7 @@ export function DiaryThumnail({ diary }: DiaryThumnailProps): ReactElement {
   // TODO : REPLACE
 
   return (
-    <Link to={`${DIARY_PAGE_PATH}/${diary.diaryId}`} css={css``}>
+    <Link to={`${DIARY_PAGE_PATH}/${diary.diaryId}`} css={hoverActiveStyle}>
       <Img
         css={css`
           object-fit: contain;
@@ -29,16 +30,21 @@ export function DiaryThumnailsSkeleton(): ReactElement {
   return (
     <>
       {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
-        <Skeleton
-          variant="rounded"
-          css={css`
-            aspect-ratio: 1;
-            width: 100%;
-            height: 100%;
-          `}
-          key={index}
-        />
+        <DiaryThumnailSkeleton key={index} />
       ))}
     </>
+  );
+}
+export function DiaryThumnailSkeleton(): ReactElement {
+  return (
+    <Skeleton
+      variant="rounded"
+      css={css`
+        aspect-ratio: 1;
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+      `}
+    />
   );
 }

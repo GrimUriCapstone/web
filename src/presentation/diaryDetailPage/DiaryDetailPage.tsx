@@ -2,7 +2,7 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { parseNumber } from "@data/utils/parseNumber";
 import { DIARY_PAGE_PATH } from "@domain/constants/paths";
 import { UnKnown } from "@domain/errors/UnKnown";
-import { IconButton, Typography, css } from "@mui/material";
+import { Chip, IconButton, Typography, css } from "@mui/material";
 import { Img } from "@presentation/common/atomics/Image";
 import { ContentPadding, Page } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
@@ -84,6 +84,11 @@ export function DiaryDetailPage(): ReactElement {
           <IconButton onClick={openModal}>
             <ExpandLessIcon />
           </IconButton>
+        </div>
+        <div>
+          {diary?.tags.map((tag) => (
+            <Chip label={tag.korTag} key={tag.korTag} />
+          ))}
         </div>
         <pre
           css={css`

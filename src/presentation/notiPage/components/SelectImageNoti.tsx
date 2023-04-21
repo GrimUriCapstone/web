@@ -2,7 +2,7 @@ import { type Diary } from "@domain/models/diary";
 import { css } from "@emotion/react";
 import { mq } from "@presentation/common/theme/mediaQuery";
 import { type ReactElement } from "react";
-import { FadeImages } from "./FadeImage";
+import { FadeImages, FadeImagesSkeleton } from "./FadeImage";
 import { ListItemButton, Skeleton } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { SELECT_PAGE_PATH } from "@domain/constants/paths";
@@ -21,7 +21,12 @@ export function SelectImageNoti({ diary }: SelectImageNotiProps): ReactElement {
       }}
       css={selectImageNotiContainerStyles}
     >
-      <FadeImages images={diary.candidateImageUrls} />
+      {isGenerated ? (
+        <FadeImages images={diary.candidateImageUrls} />
+      ) : (
+        <FadeImagesSkeleton />
+      )}
+
       <div css={selectImageNotiDetailStyles}>
         <p
           css={css`

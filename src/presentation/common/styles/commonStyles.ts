@@ -17,3 +17,18 @@ export const linkStyle = css`
   align-self: center;
   justify-self: center;
 `;
+
+export const transitionStyle = css`
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+`;
+export const hoverActiveStyle = css`
+  ${transitionStyle}
+  transition-property: transform;
+  &:hover {
+    transform: rotate(1deg);
+  }
+  &:active {
+    transform: scale(110%);
+  }
+`;

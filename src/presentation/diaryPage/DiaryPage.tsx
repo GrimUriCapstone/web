@@ -5,6 +5,7 @@ import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { BottonNavigationBar } from "@presentation/common/components/BottomNavigationBar";
 import {
   DiaryThumnailsSkeleton,
+  DiaryThumnailSkeleton,
   DiaryThumnail,
 } from "@presentation/diaryPage/components/DiaryThumnail";
 
@@ -19,15 +20,7 @@ export function DiaryPage(): ReactElement {
   const { showSnackbar } = notificationStore();
   const { data: diaries, isLoading } = useQuery(
     ["diary", "getDiaries"],
-    async () => {
-      const result = await getDiaries();
-      return result.filter((diary) => {
-        if (diary.imageSelected) {
-          return true;
-        }
-        return false;
-      });
-    },
+    getDiaries,
     {
       onError: () => {
         showSnackbar({
@@ -45,9 +38,13 @@ export function DiaryPage(): ReactElement {
           {isLoading ? (
             <DiaryThumnailsSkeleton />
           ) : (
-            diaries?.map((diary) => (
-              <DiaryThumnail diary={diary} key={diary.diaryId} />
-            ))
+            diaries?.map((diary) => {
+              if (diary.imageSelected) {
+                return <DiaryThumnail diary={diary} key={diary.diaryId} />;
+              }
+
+              return <DiaryThumnailSkeleton key={diary.diaryId} />;
+            })
           )}
         </div>
       </ContentPadding>
