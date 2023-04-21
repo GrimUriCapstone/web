@@ -6,7 +6,7 @@ import { UnKnown } from "@domain/errors/UnKnown";
 import { Button, css } from "@mui/material";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { AbsoluteTobBar, TopBar } from "@presentation/common/components/TopBar";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, type ReactElement, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -16,10 +16,10 @@ import { LoadingModal } from "@presentation/common/components/LoadingModal";
 export function SelectPage(): ReactElement {
   const { diaryId } = useParams();
   const { getDiary, postMainImage } = useDirayRepository();
-
   const { showSnackbar } = notificationStore();
+  const queryClient = useQueryClient();
   const { data: diary, isLoading } = useQuery(
-    ["getDiary"],
+    ["diary", "getDiary"],
     async () => {
       const id = parseNumber(diaryId);
       if (id === undefined) {
@@ -36,7 +36,7 @@ export function SelectPage(): ReactElement {
     }
   );
   const { mutate, isLoading: isLoading2 } = useMutation(
-    ["getDiary"],
+    ["postMainImage"],
     async () => {
       await postMainImage(
         diary!.diaryId,
@@ -50,10 +50,12 @@ export function SelectPage(): ReactElement {
           snackbarConf: { variant: "error", message: "선택 실패" },
         });
       },
-      onSuccess: () => {
+      onSuccess: async () => {
         showSnackbar({
           snackbarConf: { variant: "success", message: "선택 성공" },
         });
+
+        await queryClient.invalidateQueries({ queryKey: ["diary"] });
         navigate(`${DIARY_PAGE_PATH}/${diary!.diaryId}`);
       },
     }

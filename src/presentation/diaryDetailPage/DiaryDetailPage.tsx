@@ -23,7 +23,7 @@ export function DiaryDetailPage(): ReactElement {
     isLoading,
     isError,
   } = useQuery(
-    ["getDiary"],
+    ["diary", "getDiary"],
     async () => {
       const id = parseNumber(diaryId);
       if (id === undefined) {

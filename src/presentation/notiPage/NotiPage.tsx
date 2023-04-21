@@ -13,7 +13,7 @@ export function NotiPage(): ReactElement {
   const { getDiaries } = useDirayRepository();
   const { showSnackbar } = notificationStore();
   const { data: diaries, isLoading } = useQuery(
-    ["getDiaries"],
+    ["diary", "getDiaries"],
     async () => {
       const result = await getDiaries();
       return result.filter((diary: Diary) => {
