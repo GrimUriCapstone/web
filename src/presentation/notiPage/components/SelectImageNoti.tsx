@@ -12,21 +12,23 @@ interface SelectImageNotiProps {
 }
 export function SelectImageNoti({ diary }: SelectImageNotiProps): ReactElement {
   const navigate = useNavigate();
+  const isGenerated = diary.candidateImageUrls.length > 0;
   return (
     <ListItemButton
       onClick={() => {
+        if (!isGenerated) return;
         navigate(`${SELECT_PAGE_PATH}/${diary.diaryId}`);
       }}
       css={selectImageNotiContainerStyles}
     >
-      <FadeImages candidateImageUrls={diary.candidateImageUrls} />
+      <FadeImages images={diary.candidateImageUrls} />
       <div css={selectImageNotiDetailStyles}>
         <p
           css={css`
             color: gray;
           `}
         >
-          그림 생성 완료
+          그림 생성 {isGenerated ? "완료" : "중"}
         </p>
         <p
           css={css`

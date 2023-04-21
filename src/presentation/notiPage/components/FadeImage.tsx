@@ -1,12 +1,14 @@
 import { type Photo } from "@domain/models/diary";
 import { css } from "@emotion/react";
+import { CircularProgress, Skeleton } from "@mui/material";
+import { centerStyle } from "@presentation/common/styles/commonStyles";
 import { type ReactElement, useState, useEffect } from "react";
 
 interface FadeImagesProps {
-  candidateImageUrls: Photo[];
+  images: Photo[];
 }
 export function FadeImages({
-  candidateImageUrls,
+  images: candidateImageUrls,
 }: FadeImagesProps): ReactElement {
   const [currentIdx, setCurrentIdx] = useState(0);
   useEffect(() => {
@@ -23,7 +25,24 @@ export function FadeImages({
     };
   }, []);
   if (candidateImageUrls.length === 0) {
-    return <div></div>;
+    return (
+      <Skeleton
+        css={css`
+          aspect-ratio: 1;
+          border-radius: 10px;
+          width: 100%;
+          max-width: 100px;
+          ${centerStyle}
+        `}
+        variant="rounded"
+      >
+        <CircularProgress
+          css={css`
+            visibility: visible;
+          `}
+        />
+      </Skeleton>
+    );
   }
   return (
     <img
