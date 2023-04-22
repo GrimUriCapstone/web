@@ -2,7 +2,7 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { parseNumber } from "@data/utils/parseNumber";
 import { DIARY_PAGE_PATH } from "@domain/constants/paths";
 import { UnKnown } from "@domain/errors/UnKnown";
-import { Chip, IconButton, Typography, css } from "@mui/material";
+import { Chip, IconButton, Skeleton, Typography, css } from "@mui/material";
 import { Img } from "@presentation/common/atomics/Image";
 import { ContentPadding, Page } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
@@ -53,7 +53,42 @@ export function DiaryDetailPage(): ReactElement {
     setExpand(true);
   };
   if (isLoading) {
-    return <LoadingModal />;
+    return (
+      <>
+        <AbsoluteTobBar to={DIARY_PAGE_PATH} />
+        <Skeleton
+          css={css`
+            width: 100%;
+            aspect-ratio: 1;
+            height: 100%;
+          `}
+          variant="rounded"
+        />
+        <ContentPadding>
+          <Skeleton
+            variant="rounded"
+            css={css`
+              height: 40px;
+              width: 150px;
+            `}
+          />
+          <Skeleton
+            variant="rounded"
+            css={css`
+              height: 30px;
+              width: 150px;
+            `}
+          />
+          <Skeleton
+            variant="rounded"
+            css={css`
+              height: 300px;
+              width: 100%;
+            `}
+          />
+        </ContentPadding>
+      </>
+    );
   }
   if (isError) {
     <>
