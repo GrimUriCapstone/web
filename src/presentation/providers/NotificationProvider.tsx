@@ -34,11 +34,15 @@ export function NotificationProvider(): ReactElement {
   };
   const messaging = getMessaging();
   const navigate = useNavigate();
-  onMessage(messaging, (payload) => {
-    setNotification(payload as NotificationConfig);
-  });
+
   useEffect(() => {
     requestPermission();
+    const unsub = onMessage(messaging, (payload) => {
+      setNotification(payload as NotificationConfig);
+    });
+    return () => {
+      unsub();
+    };
   }, []);
   const hanldeNotificationClose = (): void => {
     setNotification(null);
@@ -50,10 +54,7 @@ export function NotificationProvider(): ReactElement {
           open={true}
           autoHideDuration={10000}
           onClose={hanldeNotificationClose}
-          css={css`
-            top: 50px;
-            bottom: auto;
-          `}
+          anchorOrigin={{ horizontal: "center", vertical: "top" }}
           ClickAwayListenerProps={{ onClickAway: () => null }}
           action={
             <>
@@ -85,9 +86,7 @@ export function NotificationProvider(): ReactElement {
         <Snackbar
           open={true}
           autoHideDuration={6000}
-          css={css`
-            bottom: 50px;
-          `}
+          anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
         >
           <Alert
             severity={snackbarConf.variant}
