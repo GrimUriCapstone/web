@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
+import { getMessaging, getToken } from "firebase/messaging";
 const {
   VITE_FIREBASE_API_KEY,
   VITE_FIREBASE_AUTH_DOMAIN,
@@ -9,6 +10,7 @@ const {
   VITE_FIREBASE_APP_ID,
   VITE_FIREBASE_MEASUREMENT_ID,
   VITE_FIREBASE_DATABASE_URL,
+  VITE_FIREBASE_VAPID_KEY,
 } = import.meta.env;
 const firebaseConfig = {
   apiKey: VITE_FIREBASE_API_KEY,
@@ -22,5 +24,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+export const messaging = getMessaging(app);
+
+export const getMessagingToken = async (): Promise<string> => {
+  const token = await getToken(messaging, {
+    vapidKey: VITE_FIREBASE_VAPID_KEY,
+  });
+  return token;
+};
+
 export const auth = getAuth(app);
 export const googleAuthProvider = new GoogleAuthProvider();
