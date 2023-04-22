@@ -19,7 +19,7 @@ export function ProtectedRoute({
   const { init } = useAuthInitStore();
   const navigate = useNavigate();
   useEffect((): void => {
-    if ((accessToken == null || user == null) && init) {
+    if (accessToken == null && user == null && init) {
       navigate(SETTINGS_PAGE_PATH);
       showSnackbar({
         snackbarConf: { variant: "warning", message: "로그인 해주세요" },
