@@ -1,4 +1,5 @@
 import { useApi } from "@data/hooks/useApi";
+import { getMessagingToken } from "@data/utils/firebaseInit";
 import { NotFound } from "@domain/errors/NotFound";
 import { UnKnown } from "@domain/errors/UnKnown";
 import { type User } from "@domain/models/user";
@@ -16,9 +17,24 @@ interface PostUserSignUpProps {
 export const useUserRepository = (): UserRepository => {
   const { api, authApi } = useApi();
 
+  const postFcmToken = async (): Promise<void> => {
+    try {
+      const token = await getMessagingToken();
+      const result = await authApi.post("/user/fcmtoken", { fcm_token: token });
+      return result.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.code === AxiosError.ERR_BAD_REQUEST) {
+          throw new NotFound();
+        }
+      }
+      throw error;
+    }
+  };
   const getUserInfo = async (): Promise<User> => {
     try {
       const result = await authApi.get("/user/whoami");
+      await postFcmToken();
       return result.data;
     } catch (error) {
       if (error instanceof AxiosError) {
