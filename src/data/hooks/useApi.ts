@@ -11,7 +11,7 @@ interface UseCustomClientReturns {
 }
 
 export const useApi = (): UseCustomClientReturns => {
-  const { accessToken } = useAuthStore();
+  const { accessToken, firebaseUser, updateAccessToken } = useAuthStore();
 
   const api = axios.create({
     baseURL: VITE_SERVER_URL,
@@ -20,14 +20,20 @@ export const useApi = (): UseCustomClientReturns => {
     baseURL: VITE_SERVER_URL,
   });
 
-  authApi.interceptors.request.use((config) => {
+  authApi.interceptors.request.use(async (config) => {
     if (accessToken != null) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-      return config;
+      try {
+        const newAccessToken = await firebaseUser?.getIdToken();
+        updateAccessToken(newAccessToken!);
+        config.headers.Authorization = `Bearer ${newAccessToken!}`;
+        return config;
+      } catch {
+        config.headers.Authorization = `Bearer ${accessToken}`;
+        return config;
+      }
     }
     throw new UnAuthorized();
   });
-
   return {
     api,
     authApi,

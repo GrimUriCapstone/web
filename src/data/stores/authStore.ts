@@ -7,6 +7,7 @@ import { devtools, persist } from "zustand/middleware";
 interface AuthStore {
   firebaseUser: Nullable<FirebaseUser>;
   accessToken: Nullable<string>;
+  updateAccessToken: (token: string) => void;
 }
 
 interface AuthInitStore {
@@ -23,6 +24,9 @@ export const useAuthStore = create<AuthStore>()(
       (set) => ({
         firebaseUser: null,
         accessToken: null,
+        updateAccessToken: (token: string): void => {
+          set({ accessToken: token });
+        },
       }),
       { name: "auth-storage" }
     )
