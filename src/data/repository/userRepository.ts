@@ -18,7 +18,7 @@ interface PostUserSignUpProps {
 export const useUserRepository = (): UserRepository => {
   const { api, authApi } = useApi();
   const fcmTest = (): void => {
-    authApi.get("/fcm/notification-test?diaryId=1&diaryTitle=hi");
+    authApi.get("/fcm/notification-test?diaryId=3&diaryTitle=hi");
   };
   const postFcmToken = async (): Promise<void> => {
     try {

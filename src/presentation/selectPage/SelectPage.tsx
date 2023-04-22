@@ -65,7 +65,10 @@ export function SelectPage(): ReactElement {
     if (diaryId === undefined) {
       navigate(DIARY_PAGE_PATH);
     }
-  }, []);
+    if (diary?.imageSelected === true) {
+      navigate(`${DIARY_PAGE_PATH}/${diaryId!}`);
+    }
+  }, [diary]);
   const [currentIdx, setCurrentIdx] = useState(0);
   if (isLoading) {
     return <div></div>;

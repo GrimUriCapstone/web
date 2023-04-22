@@ -11,6 +11,10 @@ interface NotificationConfig {
     diaryId?: string;
     diaryTitle?: string;
   };
+
+  fcmOptions: {
+    link: string;
+  };
   notification: {
     title: string;
     body: string;
@@ -56,7 +60,7 @@ export function NotificationProvider(): ReactElement {
               <Button
                 size="small"
                 onClick={() => {
-                  navigate(NOTI_PAGE_PATH);
+                  navigate(notification.fcmOptions.link);
                   hanldeNotificationClose();
                 }}
               >
