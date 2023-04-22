@@ -8,6 +8,7 @@ import { AxiosError } from "axios";
 interface UserRepository {
   getUserInfo: () => Promise<User>;
   postUserSignUp: ({ nickname }: PostUserSignUpProps) => Promise<User>;
+  fcmTest: () => void;
 }
 
 interface PostUserSignUpProps {
@@ -16,7 +17,9 @@ interface PostUserSignUpProps {
 
 export const useUserRepository = (): UserRepository => {
   const { api, authApi } = useApi();
-
+  const fcmTest = (): void => {
+    authApi.get("/fcm/notification-test?diaryId=1&diaryTitle=hi");
+  };
   const postFcmToken = async (): Promise<void> => {
     try {
       const token = await getMessagingToken();
@@ -53,5 +56,5 @@ export const useUserRepository = (): UserRepository => {
     return result.data;
   };
 
-  return { getUserInfo, postUserSignUp };
+  return { getUserInfo, postUserSignUp, fcmTest };
 };

@@ -16,7 +16,7 @@ import { AuthProivder } from "@presentation/providers/AuthProvider";
 import { createBrowserRouter } from "react-router-dom";
 import { DiaryDetailPage } from "@presentation/diaryDetailPage/DiaryDetailPage";
 import { NotiPage } from "@presentation/notiPage/NotiPage";
-import { SnackbarProvider } from "@presentation/providers/SnackbarProvider";
+import { NotificationProvider } from "@presentation/providers/NotificationProvider";
 import { SelectPage } from "@presentation/selectPage/SelectPage";
 
 export const router = createBrowserRouter([
@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
     element: (
       <>
         <AuthProivder />
-        <SnackbarProvider />
+        <NotificationProvider />
       </>
     ),
     children: [

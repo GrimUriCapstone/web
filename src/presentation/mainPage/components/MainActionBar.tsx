@@ -7,6 +7,7 @@ import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { centerStyle } from "@presentation/common/styles/commonStyles";
+import { useUserRepository } from "@data/repository/userRepository";
 
 function NotificationIconWithIndicator(): ReactElement {
   const theme = useTheme();
