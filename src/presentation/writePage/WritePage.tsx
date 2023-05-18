@@ -2,7 +2,7 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { notificationStore } from "@data/stores/notificationStore";
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { css } from "@emotion/react";
-import { Button } from "@mui/material";
+import { Button, FormControlLabel, Switch, ToggleButton } from "@mui/material";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { PaperTextArea } from "@presentation/common/components/PaperTextArea";
@@ -12,10 +12,14 @@ import { centerStyle } from "@presentation/common/styles/commonStyles";
 import { useMutation } from "@tanstack/react-query";
 import { useState, type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
+import { StyleSelect, ThemeSelect } from "./components/PromptSelects";
 
 export function WritePage(): ReactElement {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const [open, setIsOpen] = useState(true);
+  const [styleId, setStyleId] = useState(1);
+  const [themeId, setThemeId] = useState(1);
   const navigate = useNavigate();
   const { postDiary } = useDirayRepository();
   const { showSnackbar } = notificationStore();
@@ -39,7 +43,7 @@ export function WritePage(): ReactElement {
       });
       return;
     }
-    mutate({ content, title });
+    mutate({ content, title, open, styleId, themeId });
   };
   return (
     <>
@@ -51,6 +55,27 @@ export function WritePage(): ReactElement {
           content={content}
           title={title}
           setTitle={setTitle}
+        />
+        <FormControlLabel
+          control={
+            <Switch
+              defaultChecked
+              onChange={(e) => {
+                setIsOpen(e.target.checked);
+              }}
+            />
+          }
+          label="공개"
+        />
+        <ThemeSelect
+          handleChange={(value) => {
+            setThemeId(value);
+          }}
+        />
+        <StyleSelect
+          handleChange={(value) => {
+            setStyleId(value);
+          }}
         />
         <div
           css={css`

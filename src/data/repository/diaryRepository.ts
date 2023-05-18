@@ -12,6 +12,9 @@ interface DiaryRepository {
 interface PostDiaryProps {
   title: string;
   content: string;
+  open: boolean;
+  styleId: number;
+  themeId: number;
 }
 export const useDirayRepository = (): DiaryRepository => {
   const { api, authApi } = useApi();
