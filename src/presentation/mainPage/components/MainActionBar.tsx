@@ -35,7 +35,7 @@ function NotificationIconWithIndicator(): ReactElement {
           ${centerStyle}
         `}
       >
-        99
+        1
       </div>
       <IconButton>
         <NotificationsIcon fontSize="large" />

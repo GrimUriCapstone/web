@@ -8,7 +8,7 @@ export function MainTitle(): ReactElement {
       css={css`
         align-self: flex-start;
         width: 100%;
-        padding-top: 50px;
+        padding-top: 60px;
       `}
     >
       <Typography

@@ -13,6 +13,7 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { useQuery } from "@tanstack/react-query";
 import { DiaryThumnail } from "@presentation/diaryPage/components/DiaryThumnail";
 import { Img } from "@presentation/common/atomics/Image";
+import { DiaryPreview } from "@presentation/common/components/DiaryPreview";
 export function MainPage(): ReactElement {
   const { user } = useUserStore();
   const { getRecentDiaries } = useDirayRepository();
@@ -48,12 +49,23 @@ export function MainPage(): ReactElement {
           (isLoading || data == null ? (
             <CircularProgress />
           ) : (
-            <div>
+            <div
+              css={css`
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+              `}
+            >
               {data.map((diary) => (
-                <Img src={diary.mainImageUrl.imageUrl} key={diary.diaryId} />
+                <DiaryPreview diary={diary} key={diary.diaryId} />
               ))}
             </div>
           ))}
+        <div
+          css={css`
+            height: 70px;
+          `}
+        />
       </ContentPadding>
       <BottonNavigationBar activeIdx={0} />
     </>
