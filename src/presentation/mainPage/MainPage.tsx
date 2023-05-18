@@ -5,25 +5,55 @@ import { MainActionBar } from "./components/MainActionBar";
 import { MainTitle } from "./components/MainTitle";
 import { css } from "@emotion/react";
 import { centerStyle } from "@presentation/common/styles/commonStyles";
+import { useUserStore } from "@data/stores/userStore";
+import { Button, CircularProgress } from "@mui/material";
+import { Link } from "react-router-dom";
+import { SETTINGS_PAGE_PATH } from "@domain/constants/paths";
+import { useDirayRepository } from "@data/repository/diaryRepository";
+import { useQuery } from "@tanstack/react-query";
+import { DiaryThumnail } from "@presentation/diaryPage/components/DiaryThumnail";
+import { Img } from "@presentation/common/atomics/Image";
 export function MainPage(): ReactElement {
+  const { user } = useUserStore();
+  const { getRecentDiaries } = useDirayRepository();
+  const { data, isLoading } = useQuery(
+    ["diary", "getRecentDiary"],
+    getRecentDiaries,
+    {}
+  );
   return (
     <>
+      <MainActionBar />
       <ContentPadding>
-        <MainActionBar />
         <MainTitle />
-        <div
-          css={css`
-            ${centerStyle}
-            height:100%;
-          `}
-        >
-          <img
-            src="/images/mainBanner.png"
+        {user == null && (
+          <div
             css={css`
-              width: 100%;
+              ${centerStyle}
+              height:100%;
             `}
-          />
-        </div>
+          >
+            <img
+              src="/images/mainBanner.png"
+              css={css`
+                width: 100%;
+              `}
+            />
+            <Link to={SETTINGS_PAGE_PATH}>
+              <Button>로그인하기</Button>
+            </Link>
+          </div>
+        )}
+        {user != null &&
+          (isLoading || data == null ? (
+            <CircularProgress />
+          ) : (
+            <div>
+              {data.map((diary) => (
+                <Img src={diary.mainImageUrl.imageUrl} key={diary.diaryId} />
+              ))}
+            </div>
+          ))}
       </ContentPadding>
       <BottonNavigationBar activeIdx={0} />
     </>

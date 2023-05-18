@@ -7,6 +7,7 @@ interface DiaryRepository {
   getDiary: (diaryId: number) => Promise<Diary>;
   postMainImage: (diaryId: number, imageId: number) => Promise<void>;
   removeDiary: (diaryId: number) => Promise<void>;
+  getRecentDiaries: () => Promise<Diary[]>;
 }
 
 interface PostDiaryProps {
@@ -43,5 +44,17 @@ export const useDirayRepository = (): DiaryRepository => {
   const removeDiary = async (diaryId: number): Promise<void> => {
     await authApi.delete(`/diary/${diaryId}`);
   };
-  return { postDiary, getDiaries, getDiary, postMainImage, removeDiary };
+
+  const getRecentDiaries = async (): Promise<Diary[]> => {
+    const result = await authApi.get("/diary/recent");
+    return result.data.content;
+  };
+  return {
+    postDiary,
+    getDiaries,
+    getDiary,
+    postMainImage,
+    removeDiary,
+    getRecentDiaries,
+  };
 };

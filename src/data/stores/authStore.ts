@@ -3,6 +3,7 @@ import { signInWithRedirect, type User as FirebaseUser } from "firebase/auth";
 import { create } from "zustand";
 
 import { devtools, persist } from "zustand/middleware";
+import { useUserStore } from "./userStore";
 
 interface AuthStore {
   firebaseUser: Nullable<FirebaseUser>;
@@ -47,6 +48,9 @@ export const signOut = async (): Promise<void> => {
     useAuthStore.setState({
       firebaseUser: null,
       accessToken: null,
+    });
+    useUserStore.setState({
+      user: null,
     });
   } catch (error) {
     console.warn(error);

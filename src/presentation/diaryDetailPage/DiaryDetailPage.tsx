@@ -121,7 +121,7 @@ export function DiaryDetailPage(): ReactElement {
             <ExpandLessIcon />
           </IconButton>
         </div>
-        <DiaryTags diary={diary} />
+        <DiaryTags diary={diary!} />
         <pre
           css={css`
             width: 100%;

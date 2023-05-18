@@ -8,6 +8,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { centerStyle } from "@presentation/common/styles/commonStyles";
 import { useUserRepository } from "@data/repository/userRepository";
+import { mq } from "@presentation/common/theme/mediaQuery";
 
 function NotificationIconWithIndicator(): ReactElement {
   const theme = useTheme();
@@ -47,10 +48,17 @@ export function MainActionBar(): ReactElement {
   return (
     <div
       css={css`
+        position: fixed;
         display: flex;
         justify-content: space-between;
         width: 100%;
         align-items: center;
+        background-color: white;
+        padding: 10px;
+        box-shadow: 0px 2px 1px #0000004f;
+        ${mq.sm} {
+          width: 480px;
+        }
       `}
     >
       <LocalLibraryIcon
