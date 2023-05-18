@@ -10,7 +10,7 @@ import { type ReactElement } from "react";
 const themes = [
   {
     id: 1,
-    label: "배경화",
+    label: "인물화",
   },
   {
     id: 2,

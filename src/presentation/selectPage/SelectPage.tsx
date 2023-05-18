@@ -12,6 +12,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { ImageCarousel } from "@presentation/common/components/ImageCarousel";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
+import { DiaryTags } from "@presentation/common/components/DiaryTags";
 
 export function SelectPage(): ReactElement {
   const { diaryId } = useParams();
@@ -96,7 +97,15 @@ export function SelectPage(): ReactElement {
         >
           대표 이미지로 선택하기
         </Button>
-        <p>{diary!.title}</p>
+        <DiaryTags diary={diary!} />
+        <p
+          css={css`
+            font-weight: 700;
+            font-size: 1.5rem;
+          `}
+        >
+          {diary!.title}
+        </p>
         <p>{diary!.originalContent}</p>
       </ContentPadding>
     </>

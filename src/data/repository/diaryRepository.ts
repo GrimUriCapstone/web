@@ -19,11 +19,8 @@ interface PostDiaryProps {
 export const useDirayRepository = (): DiaryRepository => {
   const { api, authApi } = useApi();
 
-  const postDiary = async ({
-    title,
-    content,
-  }: PostDiaryProps): Promise<boolean> => {
-    await authApi.post("/diary", { title, content });
+  const postDiary = async (props: PostDiaryProps): Promise<boolean> => {
+    await authApi.post("/diary", props);
     return true;
   };
 

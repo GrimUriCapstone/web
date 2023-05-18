@@ -15,10 +15,13 @@ export function SelectImageNoti({ diary }: SelectImageNotiProps): ReactElement {
   const isGenerated = diary.candidateImageUrls.length > 0;
   return (
     <ListItemButton
-      onClick={() => {
-        if (!isGenerated) return;
-        navigate(`${SELECT_PAGE_PATH}/${diary.diaryId}`);
-      }}
+      onClick={
+        isGenerated
+          ? () => {
+              navigate(`${SELECT_PAGE_PATH}/${diary.diaryId}`);
+            }
+          : undefined
+      }
       css={selectImageNotiContainerStyles}
     >
       {isGenerated ? (

@@ -13,6 +13,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { DiaryModal } from "./components/DiaryModal";
 import { notificationStore } from "@data/stores/notificationStore";
 import { AbsoluteTobBar } from "@presentation/common/components/TopBar";
+import { DiaryTags } from "@presentation/common/components/DiaryTags";
 export function DiaryDetailPage(): ReactElement {
   const { diaryId } = useParams();
   const { getDiary } = useDirayRepository();
@@ -120,11 +121,7 @@ export function DiaryDetailPage(): ReactElement {
             <ExpandLessIcon />
           </IconButton>
         </div>
-        <div>
-          {diary?.tags.map((tag) => (
-            <Chip label={tag.korTag} key={tag.korTag} />
-          ))}
-        </div>
+        <DiaryTags diary={diary} />
         <pre
           css={css`
             width: 100%;
