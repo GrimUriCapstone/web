@@ -18,17 +18,17 @@ import { notificationStore } from "@data/stores/notificationStore";
 export function DiaryPage(): ReactElement {
   const { getDiaries } = useDirayRepository();
   const { showSnackbar } = notificationStore();
-  const { data: diaries, isLoading } = useQuery(
-    ["diary", "getDiaries"],
-    getDiaries,
-    {
-      onError: () => {
-        showSnackbar({
-          snackbarConf: { variant: "error", message: "다이어리 가져오기 실패" },
-        });
-      },
-    }
-  );
+  const {
+    data: diaries,
+    isLoading,
+    refetch,
+  } = useQuery(["diary", "getDiaries"], getDiaries, {
+    onError: () => {
+      showSnackbar({
+        snackbarConf: { variant: "error", message: "다이어리 가져오기 실패" },
+      });
+    },
+  });
 
   return (
     <>
@@ -40,7 +40,13 @@ export function DiaryPage(): ReactElement {
           ) : (
             diaries?.map((diary) => {
               if (diary.imageSelected) {
-                return <DiaryThumnail diary={diary} key={diary.diaryId} />;
+                return (
+                  <DiaryThumnail
+                    diary={diary}
+                    key={diary.diaryId}
+                    refetch={refetch}
+                  />
+                );
               }
 
               return <DiaryThumnailSkeleton key={diary.diaryId} />;

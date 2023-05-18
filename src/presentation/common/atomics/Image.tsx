@@ -1,13 +1,15 @@
-import { type ReactElement, useState } from "react";
+import { type ReactElement, useState, type HTMLProps } from "react";
 
-interface ImageProps {
+interface ImageProps extends HTMLProps<HTMLImageElement> {
   src: string;
   className?: string;
 }
-export function Img({ src, className }: ImageProps): ReactElement {
+export function Img({ src, className, ...props }: ImageProps): ReactElement {
   const [source, setSource] = useState(src);
   const handleError = (): void => {
     setSource("/images/alt.png");
   };
-  return <img src={source} onError={handleError} className={className} />;
+  return (
+    <img {...props} src={source} onError={handleError} className={className} />
+  );
 }

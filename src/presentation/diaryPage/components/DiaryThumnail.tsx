@@ -1,31 +1,87 @@
 import { DIARY_PAGE_PATH, HOME_PAGE_PATH } from "@domain/constants/paths";
 import { type Diary } from "@domain/models/diary";
 import { css } from "@emotion/react";
-import { CircularProgress, Skeleton } from "@mui/material";
-import { type ReactElement } from "react";
+import { CircularProgress, IconButton, Skeleton } from "@mui/material";
+import { useState, type ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Img } from "@presentation/common/atomics/Image";
 import {
   centerStyle,
   hoverActiveStyle,
 } from "@presentation/common/styles/commonStyles";
+import { useLongPress } from "use-long-press";
+import OutsideClickHandler from "react-outside-click-handler";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { useDirayRepository } from "@data/repository/diaryRepository";
 export interface DiaryThumnailProps {
   diary: Diary;
+  refetch?: () => void;
 }
-export function DiaryThumnail({ diary }: DiaryThumnailProps): ReactElement {
+export function DiaryThumnail({
+  diary,
+  refetch,
+}: DiaryThumnailProps): ReactElement {
   // TODO : REPLACE
+  const [removeMode, setRemoveMode] = useState(false);
+  const { removeDiary } = useDirayRepository();
+  const bind = useLongPress(() => {
+    setRemoveMode(true);
+  });
 
   return (
-    <Link to={`${DIARY_PAGE_PATH}/${diary.diaryId}`} css={hoverActiveStyle}>
-      <Img
-        css={css`
-          object-fit: contain;
-          border-radius: 16px;
-          width: 100%;
-        `}
-        src={diary.mainImageUrl.imageUrl}
-      />
-    </Link>
+    <OutsideClickHandler
+      onOutsideClick={() => {
+        setRemoveMode(false);
+      }}
+    >
+      {removeMode ? (
+        <div
+          css={css`
+            position: relative;
+          `}
+        >
+          <IconButton
+            css={css`
+              position: absolute;
+              right: 0px;
+              top: 0px;
+              background-color: #ffffff44;
+            `}
+            onClick={() => {
+              removeDiary(diary.diaryId);
+              refetch?.();
+            }}
+          >
+            <RemoveCircleIcon />
+          </IconButton>
+          <Img
+            css={css`
+              object-fit: contain;
+              border-radius: 16px;
+              width: 100%;
+            `}
+            draggable={false}
+            src={diary.mainImageUrl.imageUrl}
+          />
+        </div>
+      ) : (
+        <Link
+          to={`${DIARY_PAGE_PATH}/${diary.diaryId}`}
+          css={hoverActiveStyle}
+          {...bind()}
+        >
+          <Img
+            css={css`
+              object-fit: contain;
+              border-radius: 16px;
+              width: 100%;
+            `}
+            src={diary.mainImageUrl.imageUrl}
+            draggable={false}
+          />
+        </Link>
+      )}
+    </OutsideClickHandler>
   );
 }
 
