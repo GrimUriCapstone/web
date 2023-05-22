@@ -1,3 +1,4 @@
+import { useUserRepository } from "@data/repository/userRepository";
 import {
   useAuthStore,
   signInWithGoogle,
@@ -12,6 +13,7 @@ import { type ReactElement } from "react";
 
 function AuthSetting(): ReactElement {
   const accessToken = useAuthStore((state) => state.accessToken);
+  const { logout } = useUserRepository();
   return (
     <div>
       {accessToken == null ? (
@@ -29,6 +31,7 @@ function AuthSetting(): ReactElement {
             variant="outlined"
             onClick={() => {
               signOut();
+              logout();
             }}
           >
             로그아웃

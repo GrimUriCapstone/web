@@ -9,6 +9,7 @@ interface UserRepository {
   getUserInfo: () => Promise<User>;
   postUserSignUp: ({ nickname }: PostUserSignUpProps) => Promise<User>;
   fcmTest: () => void;
+  logout: () => Promise<void>;
 }
 
 interface PostUserSignUpProps {
@@ -56,5 +57,9 @@ export const useUserRepository = (): UserRepository => {
     return result.data;
   };
 
-  return { getUserInfo, postUserSignUp, fcmTest };
+  const logout = async (): Promise<void> => {
+    await authApi.post("/user/logout");
+  };
+
+  return { getUserInfo, postUserSignUp, fcmTest, logout };
 };
