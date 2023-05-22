@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import { SETTINGS_PAGE_PATH } from "@domain/constants/paths";
 import { useDirayRepository } from "@data/repository/diaryRepository";
 import { useQuery } from "@tanstack/react-query";
-import { DiaryThumnail } from "@presentation/diaryPage/components/DiaryThumnail";
 import { Img } from "@presentation/common/atomics/Image";
 import { DiaryPreview } from "@presentation/common/components/DiaryPreview";
 export function MainPage(): ReactElement {

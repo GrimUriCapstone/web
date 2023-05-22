@@ -46,7 +46,7 @@ export const useDirayRepository = (): DiaryRepository => {
   };
 
   const getRecentDiaries = async (): Promise<Diary[]> => {
-    const result = await authApi.get("/diary/recent");
+    const result = await authApi.get("/diary/recent?sort=createdAt,DESC");
     return result.data.content;
   };
   return {
