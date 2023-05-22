@@ -35,7 +35,24 @@ export const DiaryPreview = ({ diary }: { diary: Diary }): ReactElement => {
             justify-content: space-between;
           `}
         >
-          <span> {diary.writerNickname}</span>
+          <div
+            css={css`
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 4px;
+            `}
+          >
+            <img
+              src={diary.profileImage}
+              css={css`
+                border-radius: 50%;
+                width: 16px;
+                height: 16px;
+              `}
+            />
+            <span> {diary.writerNickname}</span>
+          </div>
           <span> {date.toLocaleDateString("ko-kr")}</span>
         </div>
         <Typography variant="h4">{diary.title}</Typography>
