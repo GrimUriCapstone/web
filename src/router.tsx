@@ -54,11 +54,7 @@ export const router = createBrowserRouter([
       },
       {
         path: `${DIARY_PAGE_PATH}/:diaryId`,
-        element: (
-          <ProtectedRoute>
-            <DiaryDetailPage />
-          </ProtectedRoute>
-        ),
+        element: <DiaryDetailPage />,
       },
       {
         path: NOTI_PAGE_PATH,

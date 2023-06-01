@@ -9,11 +9,20 @@ import {
   diaryPreviewUserInfoContainerStyles,
   diaryPreviewUserInfoImageStyles,
 } from "./DiaryPreview.styles";
+import { Link } from "react-router-dom";
+import { DIARY_PAGE_PATH } from "@domain/constants/paths";
 
 export const DiaryPreview = ({ diary }: { diary: Diary }): ReactElement => {
   const date = new Date(diary.modifiedAt);
   return (
-    <div css={css``}>
+    <Link
+      to={`${DIARY_PAGE_PATH}/${diary.diaryId}`}
+      css={css`
+        text-decoration: none;
+        appearance: none;
+        color: black;
+      `}
+    >
       <Img
         src={diary.mainImageUrl.imageUrl}
         key={diary.diaryId}
@@ -37,6 +46,6 @@ export const DiaryPreview = ({ diary }: { diary: Diary }): ReactElement => {
         </div>
         <Typography variant="h4">{diary.title}</Typography>
       </div>
-    </div>
+    </Link>
   );
 };

@@ -99,7 +99,7 @@ export function DiaryDetailPage(): ReactElement {
   }
   return (
     <>
-      <AbsoluteTobBar to={DIARY_PAGE_PATH} />
+      <AbsoluteTobBar to={".."} />
       <Img src={diary!.mainImageUrl.imageUrl} css={diaryImageStyle} />
       <ContentPadding
         css={css`
