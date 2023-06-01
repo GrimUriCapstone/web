@@ -4,62 +4,56 @@ import { type ReactElement } from "react";
 import { MainActionBar } from "./components/MainActionBar";
 import { MainTitle } from "./components/MainTitle";
 import { css } from "@emotion/react";
-import { centerStyle } from "@presentation/common/styles/commonStyles";
-import { useUserStore } from "@data/stores/userStore";
-import { Button, CircularProgress } from "@mui/material";
-import { Link } from "react-router-dom";
-import { SETTINGS_PAGE_PATH } from "@domain/constants/paths";
 import { useDirayRepository } from "@data/repository/diaryRepository";
-import { useQuery } from "@tanstack/react-query";
-import { Img } from "@presentation/common/atomics/Image";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { DiaryPreview } from "@presentation/common/components/DiaryPreview";
+import { DiaryPreviewSkeleton } from "@presentation/common/components/DiaryPreview.skeleton";
+import { BottomScrollListener } from "react-bottom-scroll-listener";
 export function MainPage(): ReactElement {
-  const { user } = useUserStore();
   const { getRecentDiaries } = useDirayRepository();
-  const { data, isLoading } = useQuery(
-    ["diary", "getRecentDiary"],
-    getRecentDiaries,
-    {}
-  );
+  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
+    useInfiniteQuery({
+      queryKey: ["diary", "getRecentDiary"],
+      queryFn: async ({ pageParam = 0 }) => {
+        return await getRecentDiaries({ page: pageParam });
+      },
+      getNextPageParam: (lastPage, allPage) => {
+        if (lastPage.last) return undefined;
+        return allPage.length + 1;
+      },
+    });
   return (
     <>
       <MainActionBar />
       <ContentPadding>
         <MainTitle />
-        {user == null && (
+        <BottomScrollListener
+          onBottom={() => {
+            if (hasNextPage === false || hasNextPage === undefined) return;
+            fetchNextPage();
+          }}
+        >
           <div
             css={css`
-              ${centerStyle}
-              height:100%;
+              display: flex;
+              flex-direction: column;
+              gap: 16px;
+              width: 100%;
             `}
           >
-            <img
-              src="/images/mainBanner.png"
-              css={css`
-                width: 100%;
-              `}
-            />
-            <Link to={SETTINGS_PAGE_PATH}>
-              <Button>로그인하기</Button>
-            </Link>
+            {isLoading || data == null
+              ? [1, 2, 3].map((_) => <DiaryPreviewSkeleton key={_} />)
+              : data.pages
+                  .map((page) => page.content)
+                  .flat()
+                  .map((diary) => (
+                    <DiaryPreview diary={diary} key={diary.diaryId} />
+                  ))}
+
+            {isFetchingNextPage &&
+              [1, 2, 3].map((_) => <DiaryPreviewSkeleton key={_} />)}
           </div>
-        )}
-        {user != null &&
-          (isLoading || data == null ? (
-            <CircularProgress />
-          ) : (
-            <div
-              css={css`
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
-              `}
-            >
-              {data.map((diary) => (
-                <DiaryPreview diary={diary} key={diary.diaryId} />
-              ))}
-            </div>
-          ))}
+        </BottomScrollListener>
         <div
           css={css`
             height: 70px;

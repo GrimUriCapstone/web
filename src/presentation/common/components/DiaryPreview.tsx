@@ -3,6 +3,12 @@ import { type ReactElement } from "react";
 import { Img } from "../atomics/Image";
 import { css } from "@emotion/react";
 import { Typography } from "@mui/material";
+import {
+  diaryContentContainerStyles,
+  diaryPreviewImageStyles,
+  diaryPreviewUserInfoContainerStyles,
+  diaryPreviewUserInfoImageStyles,
+} from "./DiaryPreview.styles";
 
 export const DiaryPreview = ({ diary }: { diary: Diary }): ReactElement => {
   const date = new Date(diary.modifiedAt);
@@ -11,45 +17,19 @@ export const DiaryPreview = ({ diary }: { diary: Diary }): ReactElement => {
       <Img
         src={diary.mainImageUrl.imageUrl}
         key={diary.diaryId}
-        css={css`
-          width: 100%;
-          object-fit: fill;
-          border-radius: 16px 16px 0px 0px;
-        `}
+        css={diaryPreviewImageStyles}
       />
-      <div
-        css={css`
-          border: 2px solid #11111155;
-          border-top: 0px;
-          padding: 16px;
-          border-radius: 0px 0px 16px 16px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          margin: 0px;
-        `}
-      >
+      <div css={diaryContentContainerStyles}>
         <div
           css={css`
             display: flex;
             justify-content: space-between;
           `}
         >
-          <div
-            css={css`
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              gap: 4px;
-            `}
-          >
+          <div css={diaryPreviewUserInfoContainerStyles}>
             <img
               src={diary.profileImage}
-              css={css`
-                border-radius: 50%;
-                width: 16px;
-                height: 16px;
-              `}
+              css={diaryPreviewUserInfoImageStyles}
             />
             <span> {diary.writerNickname}</span>
           </div>
