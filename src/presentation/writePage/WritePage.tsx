@@ -35,6 +35,7 @@ export function WritePage(): ReactElement {
         snackbarConf: { variant: "error", message: "작성 실패" },
       });
     },
+    retry: 0,
   });
   const handlePost = (): void => {
     if (content.length > 300 || content.length === 0) {

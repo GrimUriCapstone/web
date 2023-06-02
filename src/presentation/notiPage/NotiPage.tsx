@@ -8,6 +8,7 @@ import {
   SelectImageNoti,
   SelectImageNotiSkelton,
 } from "./components/SelectImageNoti";
+import { type ServerError } from "@domain/models/error";
 
 export function NotiPage(): ReactElement {
   const { getDiaries } = useDirayRepository();
@@ -26,6 +27,12 @@ export function NotiPage(): ReactElement {
         showSnackbar({
           snackbarConf: { variant: "error", message: "다이어리 가져오기 실패" },
         });
+      },
+      retry: (_, error) => {
+        if ((error as ServerError).status === 429) {
+          return false;
+        }
+        return true;
       },
     }
   );

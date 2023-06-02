@@ -38,6 +38,12 @@ export function DiaryDetailPage(): ReactElement {
           snackbarConf: { variant: "error", message: "다이어리 가져오기 실패" },
         });
       },
+      retry: (_, error) => {
+        if ((error as ServerError).status === 429) {
+          return false;
+        }
+        return true;
+      },
     }
   );
   const navigate = useNavigate();

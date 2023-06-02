@@ -13,6 +13,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ImageCarousel } from "@presentation/common/components/ImageCarousel";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { DiaryTags } from "@presentation/common/components/DiaryTags";
+import { type ServerError } from "@domain/models/error";
 
 export function SelectPage(): ReactElement {
   const { diaryId } = useParams();
@@ -33,6 +34,12 @@ export function SelectPage(): ReactElement {
         showSnackbar({
           snackbarConf: { variant: "error", message: "다이어리 가져오기 실패" },
         });
+      },
+      retry: (_, error) => {
+        if ((error as ServerError).status === 429) {
+          return false;
+        }
+        return true;
       },
     }
   );

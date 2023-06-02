@@ -14,6 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { type ReactElement } from "react";
 import { DiaryUserInfo } from "./components/DiaryUserInfo";
 import { notificationStore } from "@data/stores/notificationStore";
+import { type ServerError } from "@domain/models/error";
 
 export function DiaryPage(): ReactElement {
   const { getDiaries } = useDirayRepository();
@@ -27,6 +28,12 @@ export function DiaryPage(): ReactElement {
       showSnackbar({
         snackbarConf: { variant: "error", message: "다이어리 가져오기 실패" },
       });
+    },
+    retry: (_, error) => {
+      if ((error as ServerError).status === 429) {
+        return false;
+      }
+      return true;
     },
   });
 

@@ -13,6 +13,7 @@ import { useUserStore } from "@data/stores/userStore";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { SETTINGS_PAGE_PATH } from "@domain/constants/paths";
+import { type ServerError } from "@domain/models/error";
 export function MainPage(): ReactElement {
   const { getRecentDiaries } = useDirayRepository();
   const { user } = useUserStore();
@@ -25,6 +26,12 @@ export function MainPage(): ReactElement {
       getNextPageParam: (lastPage, allPage) => {
         if (lastPage.last) return undefined;
         return allPage.length + 1;
+      },
+      retry: (_, error) => {
+        if ((error as ServerError).status === 429) {
+          return false;
+        }
+        return true;
       },
     });
   return (
