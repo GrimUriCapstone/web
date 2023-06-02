@@ -14,10 +14,10 @@ import { notificationStore } from "@data/stores/notificationStore";
 import { AbsoluteTobBar } from "@presentation/common/components/TopBar";
 import { DiaryTags } from "@presentation/common/components/DiaryTags";
 import { type ServerError } from "@domain/models/error";
+import { DiaryDetailTabBar } from "./components/DiaryDetailTabBar";
 export function DiaryDetailPage(): ReactElement {
   const { diaryId } = useParams();
   const { getDiary } = useDirayRepository();
-
   const { showSnackbar } = notificationStore();
   const {
     data: diary,
@@ -39,7 +39,7 @@ export function DiaryDetailPage(): ReactElement {
         });
       },
       retry: (_, error) => {
-        if ((error as ServerError).status === 429) {
+        if ((error as ServerError).response.status === 429) {
           return false;
         }
         return true;
@@ -97,100 +97,109 @@ export function DiaryDetailPage(): ReactElement {
       </>
     );
   }
-  if (isError) {
-    <>
-      <AbsoluteTobBar to={DIARY_PAGE_PATH} />
-      <ContentPadding>에러 발생</ContentPadding>
-    </>;
+  if (diary == null || isError) {
+    return (
+      <>
+        <AbsoluteTobBar to={DIARY_PAGE_PATH} />
+        <ContentPadding>에러 발생</ContentPadding>
+      </>
+    );
   }
   return (
     <>
-      <AbsoluteTobBar to={".."} />
-      <Img src={diary!.mainImageUrl.imageUrl} css={diaryImageStyle} />
-      <ContentPadding
+      <DiaryDetailTabBar diary={diary} />
+      <div
+        id="diary-content"
         css={css`
-          position: relative;
+          background-color: #eeeeee;
         `}
       >
-        <div
+        <Img src={diary.mainImageUrl.imageUrl} css={diaryImageStyle} />
+        <ContentPadding
           css={css`
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            align-items: center;
-            justify-content: center;
             position: relative;
-          `}
-        >
-          <Typography variant="h4">{diary?.title}</Typography>
-
-          <IconButton
-            onClick={openModal}
-            css={css`
-              position: absolute;
-              right: 0;
-            `}
-          >
-            <ExpandLessIcon />
-          </IconButton>
-        </div>
-        <div
-          css={css`
-            display: flex;
-            align-items: center;
-            gap: 16px;
           `}
         >
           <div
             css={css`
               display: flex;
+              flex-direction: row;
+              width: 100%;
               align-items: center;
-              gap: 8px;
+              justify-content: center;
+              position: relative;
             `}
           >
-            <Avatar
-              src={diary?.profileImage}
+            <Typography variant="h4">{diary?.title}</Typography>
+
+            <IconButton
+              onClick={openModal}
               css={css`
-                width: 32px;
-                height: 32px;
+                position: absolute;
+                right: 0;
               `}
-            />
-            <Typography variant="h6">{diary?.username}</Typography>
+            >
+              <ExpandLessIcon />
+            </IconButton>
           </div>
           <div
             css={css`
-              width: 1px;
-              height: 16px;
-              background-color: gray;
+              display: flex;
+              align-items: center;
+              gap: 16px;
             `}
-          />
-          <Typography variant="h6" color={"gray"}>
-            {diary != null &&
-              new Date(Date.parse(diary.createdAt)).toLocaleDateString()}
-          </Typography>
-        </div>
-        <DiaryTags diary={diary!} />
+          >
+            <div
+              css={css`
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              `}
+            >
+              <Avatar
+                src={diary?.profileImage}
+                css={css`
+                  width: 32px;
+                  height: 32px;
+                `}
+              />
+              <Typography variant="h6">{diary?.username}</Typography>
+            </div>
+            <div
+              css={css`
+                width: 1px;
+                height: 16px;
+                background-color: gray;
+              `}
+            />
+            <Typography variant="h6" color={"gray"}>
+              {diary != null &&
+                new Date(Date.parse(diary.createdAt)).toLocaleDateString()}
+            </Typography>
+          </div>
+          <DiaryTags diary={diary} />
 
-        <pre
-          css={css`
-            width: 100%;
-            white-space: pre-wrap;
-            line-break: anywhere;
-            text-indent: 10px;
-            line-height: 150%;
-            overflow-y: hidden;
-          `}
-        >
-          {diary?.originalContent}
-        </pre>
-      </ContentPadding>
-      {expand && (
-        <DiaryModal
-          content={diary?.originalContent}
-          title={diary?.title}
-          onClick={closeModal}
-        />
-      )}
+          <pre
+            css={css`
+              width: 100%;
+              white-space: pre-wrap;
+              line-break: anywhere;
+              text-indent: 10px;
+              line-height: 150%;
+              overflow-y: hidden;
+            `}
+          >
+            {diary?.originalContent}
+          </pre>
+        </ContentPadding>
+        {expand && (
+          <DiaryModal
+            content={diary?.originalContent}
+            title={diary?.title}
+            onClick={closeModal}
+          />
+        )}
+      </div>
     </>
   );
 }

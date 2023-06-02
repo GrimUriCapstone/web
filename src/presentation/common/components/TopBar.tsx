@@ -1,7 +1,7 @@
 import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { IconButton, Typography, css } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { type ReactElement } from "react";
+import { cloneElement, type ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ToolBarPadding,
@@ -13,6 +13,7 @@ import { centerColStyle } from "../styles/commonStyles";
 interface TopBarProps {
   title?: string;
   to?: string;
+  actions?: ReactElement[];
 }
 
 export function TopBar({
@@ -64,6 +65,7 @@ export function TopBar({
 export function AbsoluteTobBar({
   title = "",
   to = HOME_PAGE_PATH,
+  actions = [],
 }: TopBarProps): ReactElement {
   const navigate = useNavigate();
   return (
@@ -96,6 +98,18 @@ export function AbsoluteTobBar({
           >
             <ArrowBackIcon />
           </IconButton>
+        </div>
+        <div
+          css={css`
+            position: absolute;
+            right: 0px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            ${contentPaddingXStyle}
+          `}
+        >
+          {actions.map((action, idx) => cloneElement(action, { key: idx }))}
         </div>
       </div>
     </>

@@ -28,7 +28,7 @@ export function MainPage(): ReactElement {
         return allPage.length + 1;
       },
       retry: (_, error) => {
-        if ((error as ServerError).status === 429) {
+        if ((error as ServerError).response.status === 429) {
           return false;
         }
         return true;
