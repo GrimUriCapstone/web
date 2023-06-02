@@ -6,8 +6,8 @@ export interface Diary {
   tags: Tag[];
   candidateImageUrls: Photo[];
   mainImageUrl: Photo;
-  writerEmail: string;
-  writerNickname: string;
+  email: string;
+  username: string;
   modifiedAt: string;
   profileImage: string;
   createdAt: string;

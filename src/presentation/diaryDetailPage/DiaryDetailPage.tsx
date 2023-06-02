@@ -2,7 +2,7 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { parseNumber } from "@data/utils/parseNumber";
 import { DIARY_PAGE_PATH } from "@domain/constants/paths";
 import { UnKnown } from "@domain/errors/UnKnown";
-import { IconButton, Skeleton, Typography, css } from "@mui/material";
+import { Avatar, IconButton, Skeleton, Typography, css } from "@mui/material";
 import { Img } from "@presentation/common/atomics/Image";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { useQuery } from "@tanstack/react-query";
@@ -134,10 +134,41 @@ export function DiaryDetailPage(): ReactElement {
             <ExpandLessIcon />
           </IconButton>
         </div>
-        <Typography variant="h6" color={"gray"}>
-          {diary != null &&
-            new Date(Date.parse(diary.createdAt)).toLocaleDateString()}
-        </Typography>
+        <div
+          css={css`
+            display: flex;
+            align-items: center;
+            gap: 16px;
+          `}
+        >
+          <div
+            css={css`
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            `}
+          >
+            <Avatar
+              src={diary?.profileImage}
+              css={css`
+                width: 32px;
+                height: 32px;
+              `}
+            />
+            <Typography variant="h6">{diary?.username}</Typography>
+          </div>
+          <div
+            css={css`
+              width: 1px;
+              height: 16px;
+              background-color: gray;
+            `}
+          />
+          <Typography variant="h6" color={"gray"}>
+            {diary != null &&
+              new Date(Date.parse(diary.createdAt)).toLocaleDateString()}
+          </Typography>
+        </div>
         <DiaryTags diary={diary!} />
 
         <pre
