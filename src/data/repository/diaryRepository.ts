@@ -10,6 +10,7 @@ interface DiaryRepository {
   getRecentDiaries: ({
     page,
   }: getRecentDiariesProps) => Promise<getRecentDiariesResponse>;
+  getUnselectedCount: () => Promise<number>;
 }
 
 interface PostDiaryProps {
@@ -65,6 +66,11 @@ export const useDirayRepository = (): DiaryRepository => {
     );
     return result.data;
   };
+
+  const getUnselectedCount = async (): Promise<number> => {
+    const result = await authApi.get("/diary/count");
+    return result.data;
+  };
   return {
     postDiary,
     getDiaries,
@@ -72,5 +78,6 @@ export const useDirayRepository = (): DiaryRepository => {
     postMainImage,
     removeDiary,
     getRecentDiaries,
+    getUnselectedCount,
   };
 };
