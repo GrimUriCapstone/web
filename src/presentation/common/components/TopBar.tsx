@@ -2,7 +2,7 @@ import { HOME_PAGE_PATH } from "@domain/constants/paths";
 import { IconButton, Typography, css } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { cloneElement, type ReactElement } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ToolBarPadding,
   contentPaddingXStyle,
@@ -20,7 +20,6 @@ export function TopBar({
   title = "",
   to = HOME_PAGE_PATH,
 }: TopBarProps): ReactElement {
-  const navigate = useNavigate();
   return (
     <>
       <ToolBarPadding />
@@ -44,14 +43,11 @@ export function TopBar({
             ${contentPaddingXStyle}
           `}
         >
-          <IconButton
-            css={css``}
-            onClick={() => {
-              navigate(to);
-            }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
+          <Link to={to}>
+            <IconButton>
+              <ArrowBackIcon />
+            </IconButton>
+          </Link>
         </div>
 
         <Typography variant="h6" component="div">
@@ -67,7 +63,6 @@ export function AbsoluteTobBar({
   to = HOME_PAGE_PATH,
   actions = [],
 }: TopBarProps): ReactElement {
-  const navigate = useNavigate();
   return (
     <>
       <div
@@ -88,16 +83,15 @@ export function AbsoluteTobBar({
             ${contentPaddingXStyle}
           `}
         >
-          <IconButton
-            css={css`
-              background-color: #f0f8ff85;
-            `}
-            onClick={() => {
-              navigate(to);
-            }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
+          <Link to={to}>
+            <IconButton
+              css={css`
+                background-color: #f0f8ff85;
+              `}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+          </Link>
         </div>
         <div
           css={css`
