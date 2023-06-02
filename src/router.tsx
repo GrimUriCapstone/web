@@ -1,5 +1,6 @@
 import {
   DIARY_PAGE_PATH,
+  DIARY_STATISTICS_PAGE_PATH,
   NOTI_PAGE_PATH,
   SELECT_PAGE_PATH,
   SETTINGS_PAGE_PATH,
@@ -46,6 +47,14 @@ export const router = createBrowserRouter([
       },
       {
         path: DIARY_PAGE_PATH,
+        element: (
+          <ProtectedRoute>
+            <DiaryPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: `${DIARY_PAGE_PATH}${DIARY_STATISTICS_PAGE_PATH}`,
         element: (
           <ProtectedRoute>
             <DiaryPage />

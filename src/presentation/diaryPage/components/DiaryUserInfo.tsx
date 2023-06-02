@@ -1,10 +1,14 @@
 import { useUserStore } from "@data/stores/userStore";
-import { type User } from "@domain/models/user";
 import { css } from "@emotion/react";
-import { Avatar, Skeleton, Typography } from "@mui/material";
+import { Avatar, IconButton, Skeleton, Typography } from "@mui/material";
 import { Img } from "@presentation/common/atomics/Image";
 import { type ReactElement } from "react";
-
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { Link } from "react-router-dom";
+import {
+  DIARY_PAGE_PATH,
+  DIARY_STATISTICS_PAGE_PATH,
+} from "@domain/constants/paths";
 export function DiaryUserInfo(): ReactElement {
   const { user } = useUserStore();
   if (user === null) return <DiaryUserInfoSkeleton />;
@@ -33,6 +37,16 @@ export function DiaryUserInfo(): ReactElement {
       >
         {user.nickname}의 일기
       </Typography>
+      <div
+        css={css`
+          flex: 1;
+        `}
+      />
+      <Link to={`${DIARY_PAGE_PATH}${DIARY_STATISTICS_PAGE_PATH}`}>
+        <IconButton>
+          <CalendarMonthIcon />
+        </IconButton>
+      </Link>
     </div>
   );
 }
