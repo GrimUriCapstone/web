@@ -2,10 +2,9 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { parseNumber } from "@data/utils/parseNumber";
 import { DIARY_PAGE_PATH } from "@domain/constants/paths";
 import { UnKnown } from "@domain/errors/UnKnown";
-import { Chip, IconButton, Skeleton, Typography, css } from "@mui/material";
+import { IconButton, Skeleton, Typography, css } from "@mui/material";
 import { Img } from "@presentation/common/atomics/Image";
-import { ContentPadding, Page } from "@presentation/common/atomics/PageContent";
-import { LoadingModal } from "@presentation/common/components/LoadingModal";
+import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, type ReactElement, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,6 +13,7 @@ import { DiaryModal } from "./components/DiaryModal";
 import { notificationStore } from "@data/stores/notificationStore";
 import { AbsoluteTobBar } from "@presentation/common/components/TopBar";
 import { DiaryTags } from "@presentation/common/components/DiaryTags";
+import { type ServerError } from "@domain/models/error";
 export function DiaryDetailPage(): ReactElement {
   const { diaryId } = useParams();
   const { getDiary } = useDirayRepository();
@@ -118,16 +118,28 @@ export function DiaryDetailPage(): ReactElement {
             flex-direction: row;
             width: 100%;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            position: relative;
           `}
         >
-          <div />
-          <Typography variant="h5">{diary?.title}</Typography>
-          <IconButton onClick={openModal}>
+          <Typography variant="h4">{diary?.title}</Typography>
+
+          <IconButton
+            onClick={openModal}
+            css={css`
+              position: absolute;
+              right: 0;
+            `}
+          >
             <ExpandLessIcon />
           </IconButton>
         </div>
+        <Typography variant="h6" color={"gray"}>
+          {diary != null &&
+            new Date(Date.parse(diary.createdAt)).toLocaleDateString()}
+        </Typography>
         <DiaryTags diary={diary!} />
+
         <pre
           css={css`
             width: 100%;

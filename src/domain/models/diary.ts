@@ -10,6 +10,7 @@ export interface Diary {
   writerNickname: string;
   modifiedAt: string;
   profileImage: string;
+  createdAt: string;
 }
 
 export interface Tag {
