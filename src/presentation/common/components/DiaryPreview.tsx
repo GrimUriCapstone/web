@@ -40,7 +40,7 @@ export const DiaryPreview = ({ diary }: { diary: Diary }): ReactElement => {
               src={diary.profileImage}
               css={diaryPreviewUserInfoImageStyles}
             />
-            <span> {diary.writerNickname}</span>
+            <span> {diary.username}</span>
           </div>
           <span> {date.toLocaleDateString("ko-kr")}</span>
         </div>
