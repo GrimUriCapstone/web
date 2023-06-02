@@ -1,5 +1,6 @@
 import {
   DIARY_PAGE_PATH,
+  DIARY_STATISTICS_PAGE_PATH,
   NOTI_PAGE_PATH,
   SELECT_PAGE_PATH,
   SETTINGS_PAGE_PATH,
@@ -18,6 +19,7 @@ import { DiaryDetailPage } from "@presentation/diaryDetailPage/DiaryDetailPage";
 import { NotiPage } from "@presentation/notiPage/NotiPage";
 import { NotificationProvider } from "@presentation/providers/NotificationProvider";
 import { SelectPage } from "@presentation/selectPage/SelectPage";
+import { StatisticsPage } from "@presentation/statisticsPage/StatisticsPage";
 
 export const router = createBrowserRouter([
   {
@@ -53,12 +55,16 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: `${DIARY_PAGE_PATH}/:diaryId`,
+        path: `${DIARY_PAGE_PATH}${DIARY_STATISTICS_PAGE_PATH}`,
         element: (
           <ProtectedRoute>
-            <DiaryDetailPage />
+            <StatisticsPage />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: `${DIARY_PAGE_PATH}/:diaryId`,
+        element: <DiaryDetailPage />,
       },
       {
         path: NOTI_PAGE_PATH,

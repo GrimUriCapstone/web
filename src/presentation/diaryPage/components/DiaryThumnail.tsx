@@ -45,14 +45,18 @@ export function DiaryThumnail({
               position: absolute;
               right: 0px;
               top: 0px;
-              background-color: #ffffff44;
+              background-color: #000000e0;
             `}
             onClick={() => {
               removeDiary(diary.diaryId);
               refetch?.();
             }}
           >
-            <RemoveCircleIcon />
+            <RemoveCircleIcon
+              css={css`
+                color: white;
+              `}
+            />
           </IconButton>
           <Img
             css={css`

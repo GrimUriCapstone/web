@@ -7,11 +7,19 @@ import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { centerStyle } from "@presentation/common/styles/commonStyles";
-import { useUserRepository } from "@data/repository/userRepository";
 import { mq } from "@presentation/common/theme/mediaQuery";
+import { useDirayRepository } from "@data/repository/diaryRepository";
+import { useQuery } from "@tanstack/react-query";
 
 function NotificationIconWithIndicator(): ReactElement {
   const theme = useTheme();
+
+  const { getUnselectedCount } = useDirayRepository();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["diary", "getUnselectedCount"],
+    queryFn: getUnselectedCount,
+  });
   return (
     <Link
       to={NOTI_PAGE_PATH}
@@ -35,7 +43,7 @@ function NotificationIconWithIndicator(): ReactElement {
           ${centerStyle}
         `}
       >
-        1
+        {isLoading || data == null ? "" : data}
       </div>
       <IconButton>
         <NotificationsIcon fontSize="large" />

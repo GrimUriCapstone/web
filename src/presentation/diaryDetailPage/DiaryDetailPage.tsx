@@ -2,10 +2,9 @@ import { useDirayRepository } from "@data/repository/diaryRepository";
 import { parseNumber } from "@data/utils/parseNumber";
 import { DIARY_PAGE_PATH } from "@domain/constants/paths";
 import { UnKnown } from "@domain/errors/UnKnown";
-import { Chip, IconButton, Skeleton, Typography, css } from "@mui/material";
+import { Avatar, IconButton, Skeleton, Typography, css } from "@mui/material";
 import { Img } from "@presentation/common/atomics/Image";
-import { ContentPadding, Page } from "@presentation/common/atomics/PageContent";
-import { LoadingModal } from "@presentation/common/components/LoadingModal";
+import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, type ReactElement, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,10 +13,11 @@ import { DiaryModal } from "./components/DiaryModal";
 import { notificationStore } from "@data/stores/notificationStore";
 import { AbsoluteTobBar } from "@presentation/common/components/TopBar";
 import { DiaryTags } from "@presentation/common/components/DiaryTags";
+import { type ServerError } from "@domain/models/error";
+import { DiaryDetailTabBar } from "./components/DiaryDetailTabBar";
 export function DiaryDetailPage(): ReactElement {
   const { diaryId } = useParams();
   const { getDiary } = useDirayRepository();
-
   const { showSnackbar } = notificationStore();
   const {
     data: diary,
@@ -37,6 +37,12 @@ export function DiaryDetailPage(): ReactElement {
         showSnackbar({
           snackbarConf: { variant: "error", message: "다이어리 가져오기 실패" },
         });
+      },
+      retry: (_, error) => {
+        if ((error as ServerError).response.status === 429) {
+          return false;
+        }
+        return true;
       },
     }
   );
@@ -91,57 +97,109 @@ export function DiaryDetailPage(): ReactElement {
       </>
     );
   }
-  if (isError) {
-    <>
-      <AbsoluteTobBar to={DIARY_PAGE_PATH} />
-      <ContentPadding>에러 발생</ContentPadding>
-    </>;
+  if (diary == null || isError) {
+    return (
+      <>
+        <AbsoluteTobBar to={DIARY_PAGE_PATH} />
+        <ContentPadding>에러 발생</ContentPadding>
+      </>
+    );
   }
   return (
     <>
-      <AbsoluteTobBar to={DIARY_PAGE_PATH} />
-      <Img src={diary!.mainImageUrl.imageUrl} css={diaryImageStyle} />
-      <ContentPadding
+      <DiaryDetailTabBar diary={diary} />
+      <div
+        id="diary-content"
         css={css`
-          position: relative;
+          background-color: #eeeeee;
         `}
       >
-        <div
+        <Img src={diary.mainImageUrl.imageUrl} css={diaryImageStyle} />
+        <ContentPadding
           css={css`
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            align-items: center;
-            justify-content: space-between;
+            position: relative;
           `}
         >
-          <div />
-          <Typography variant="h5">{diary?.title}</Typography>
-          <IconButton onClick={openModal}>
-            <ExpandLessIcon />
-          </IconButton>
-        </div>
-        <DiaryTags diary={diary!} />
-        <pre
-          css={css`
-            width: 100%;
-            white-space: pre-wrap;
-            line-break: anywhere;
-            text-indent: 10px;
-            line-height: 150%;
-            overflow-y: hidden;
-          `}
-        >
-          {diary?.originalContent}
-        </pre>
-      </ContentPadding>
-      {expand && (
-        <DiaryModal
-          content={diary?.originalContent}
-          title={diary?.title}
-          onClick={closeModal}
-        />
-      )}
+          <div
+            css={css`
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+            `}
+          >
+            <Typography variant="h4">{diary?.title}</Typography>
+
+            <IconButton
+              onClick={openModal}
+              css={css`
+                position: absolute;
+                right: 0;
+              `}
+            >
+              <ExpandLessIcon />
+            </IconButton>
+          </div>
+          <div
+            css={css`
+              display: flex;
+              align-items: center;
+              gap: 16px;
+            `}
+          >
+            <div
+              css={css`
+                display: flex;
+                align-items: center;
+                gap: 8px;
+              `}
+            >
+              <Avatar
+                src={diary?.profileImage}
+                css={css`
+                  width: 32px;
+                  height: 32px;
+                `}
+              />
+              <Typography variant="h6">{diary?.username}</Typography>
+            </div>
+            <div
+              css={css`
+                width: 1px;
+                height: 16px;
+                background-color: gray;
+              `}
+            />
+            <Typography variant="h6" color={"gray"}>
+              {diary != null &&
+                new Date(Date.parse(diary.createdAt)).toLocaleDateString()}
+            </Typography>
+          </div>
+          <DiaryTags diary={diary} />
+
+          <pre
+            css={css`
+              width: 100%;
+              white-space: pre-wrap;
+              line-break: anywhere;
+              text-indent: 10px;
+              line-height: 150%;
+              overflow-y: hidden;
+            `}
+          >
+            {diary?.originalContent}
+          </pre>
+        </ContentPadding>
+        {expand && (
+          <DiaryModal
+            content={diary?.originalContent}
+            title={diary?.title}
+            onClick={closeModal}
+          />
+        )}
+      </div>
     </>
   );
 }

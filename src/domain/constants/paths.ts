@@ -5,3 +5,4 @@ export const WRITE_PAGE_PATH = "/write";
 export const DIARY_PAGE_PATH = "/diary";
 export const SELECT_PAGE_PATH = "/select";
 export const NOTI_PAGE_PATH = "/noti";
+export const DIARY_STATISTICS_PAGE_PATH = "/statistics";

@@ -78,12 +78,14 @@ const paperStyles = css`
 const diaryTitleStyles = css`
   text-align: center;
   width: 100%;
-  margin: 0px 20px;
   font-size: 100px;
 `;
 
 const diaryContentStyles = css`
   width: 100%;
+  textarea {
+    min-height: 250px;
+  }
   /* background: linear-gradient(transparent, transparent 19px, #91d1d3 19px);
   background-size: 20px 20px; */
 `;

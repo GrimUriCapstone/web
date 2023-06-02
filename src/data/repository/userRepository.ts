@@ -1,4 +1,5 @@
 import { useApi } from "@data/hooks/useApi";
+import { signOut } from "@data/stores/authStore";
 import { getMessagingToken } from "@data/utils/firebaseInit";
 import { NotFound } from "@domain/errors/NotFound";
 import { UnKnown } from "@domain/errors/UnKnown";
@@ -9,6 +10,7 @@ interface UserRepository {
   getUserInfo: () => Promise<User>;
   postUserSignUp: ({ nickname }: PostUserSignUpProps) => Promise<User>;
   fcmTest: () => void;
+  logout: () => Promise<void>;
 }
 
 interface PostUserSignUpProps {
@@ -56,5 +58,11 @@ export const useUserRepository = (): UserRepository => {
     return result.data;
   };
 
-  return { getUserInfo, postUserSignUp, fcmTest };
+  const logout = async (): Promise<void> => {
+    signOut();
+    const fcmToken = getMessagingToken();
+    await authApi.post("/user/logout", { fcmToken });
+  };
+
+  return { getUserInfo, postUserSignUp, fcmTest, logout };
 };

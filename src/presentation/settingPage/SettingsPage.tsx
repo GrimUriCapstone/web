@@ -1,8 +1,8 @@
+import { useUserRepository } from "@data/repository/userRepository";
 import {
   useAuthStore,
   signInWithGoogle,
   useAuthInitStore,
-  signOut,
 } from "@data/stores/authStore";
 import { Button } from "@mui/material";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
@@ -12,6 +12,8 @@ import { type ReactElement } from "react";
 
 function AuthSetting(): ReactElement {
   const accessToken = useAuthStore((state) => state.accessToken);
+  const { logout } = useUserRepository();
+
   return (
     <div>
       {accessToken == null ? (
@@ -28,7 +30,7 @@ function AuthSetting(): ReactElement {
           <Button
             variant="outlined"
             onClick={() => {
-              signOut();
+              logout();
             }}
           >
             로그아웃

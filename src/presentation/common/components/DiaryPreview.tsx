@@ -3,43 +3,49 @@ import { type ReactElement } from "react";
 import { Img } from "../atomics/Image";
 import { css } from "@emotion/react";
 import { Typography } from "@mui/material";
+import {
+  diaryContentContainerStyles,
+  diaryPreviewImageStyles,
+  diaryPreviewUserInfoContainerStyles,
+  diaryPreviewUserInfoImageStyles,
+} from "./DiaryPreview.styles";
+import { Link } from "react-router-dom";
+import { DIARY_PAGE_PATH } from "@domain/constants/paths";
 
 export const DiaryPreview = ({ diary }: { diary: Diary }): ReactElement => {
   const date = new Date(diary.modifiedAt);
   return (
-    <div css={css``}>
+    <Link
+      to={`${DIARY_PAGE_PATH}/${diary.diaryId}`}
+      css={css`
+        text-decoration: none;
+        appearance: none;
+        color: black;
+      `}
+    >
       <Img
         src={diary.mainImageUrl.imageUrl}
         key={diary.diaryId}
-        css={css`
-          width: 100%;
-          object-fit: fill;
-          border-radius: 16px 16px 0px 0px;
-        `}
+        css={diaryPreviewImageStyles}
       />
-      <div
-        css={css`
-          border: 2px solid #11111155;
-          border-top: 0px;
-          padding: 16px;
-          border-radius: 0px 0px 16px 16px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          margin: 0px;
-        `}
-      >
+      <div css={diaryContentContainerStyles}>
         <div
           css={css`
             display: flex;
             justify-content: space-between;
           `}
         >
-          <span> {diary.writerNickname}</span>
+          <div css={diaryPreviewUserInfoContainerStyles}>
+            <img
+              src={diary.profileImage}
+              css={diaryPreviewUserInfoImageStyles}
+            />
+            <span> {diary.username}</span>
+          </div>
           <span> {date.toLocaleDateString("ko-kr")}</span>
         </div>
         <Typography variant="h4">{diary.title}</Typography>
       </div>
-    </div>
+    </Link>
   );
 };
