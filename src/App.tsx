@@ -41,6 +41,9 @@ export function App(): ReactElement {
                 overflow-x: hidden;
                 background-color: #eeeeee;
               }
+              a {
+                text-decoration: none;
+              }
             `}
           />
 

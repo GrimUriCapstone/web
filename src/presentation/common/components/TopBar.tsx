@@ -29,10 +29,12 @@ export function TopBar({
           right: auto;
           position: fixed;
           top: 0px;
-          z-index: 2;
+          z-index: 5;
           height: 56px;
           background-color: white;
           box-shadow: 0px 3px 6px -6px gray;
+          -webkit-transform: translate3d(0, 0, 1px);
+          transform: translate3d(0, 0, 1px);
           ${centerColStyle};
         `}
       >
@@ -74,6 +76,8 @@ export function AbsoluteTobBar({
           top: 0px;
           height: 56px;
           ${centerColStyle}
+          -webkit-transform: translate3d(0,0,1px);
+          transform: translate3d(0, 0, 1px);
         `}
       >
         <div

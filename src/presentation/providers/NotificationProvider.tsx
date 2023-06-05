@@ -4,7 +4,6 @@ import { notificationStore } from "@data/stores/notificationStore";
 import { useState, type ReactElement, useEffect } from "react";
 import { getMessaging, onMessage } from "firebase/messaging";
 import { useNavigate } from "react-router-dom";
-import { NOTI_PAGE_PATH } from "@domain/constants/paths";
 
 interface NotificationConfig {
   data: {
@@ -32,18 +31,21 @@ export function NotificationProvider(): ReactElement {
       }
     });
   };
-  const messaging = getMessaging();
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    requestPermission();
-    const unsub = onMessage(messaging, (payload) => {
-      setNotification(payload as NotificationConfig);
-    });
-    return () => {
-      unsub();
-    };
-  }, []);
+  if (window.Notification != null) {
+    const messaging = getMessaging();
+    useEffect(() => {
+      requestPermission();
+      const unsub = onMessage(messaging, (payload) => {
+        setNotification(payload as NotificationConfig);
+      });
+      return () => {
+        unsub();
+      };
+    }, []);
+  }
   const hanldeNotificationClose = (): void => {
     setNotification(null);
   };
