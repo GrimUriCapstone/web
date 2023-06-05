@@ -58,10 +58,18 @@ export function MainPage(): ReactElement {
               width: 100%;
               justify-content: center;
               align-items: center;
+              min-height: 300px;
             `}
           >
             {user == null && (
-              <Link to={SETTINGS_PAGE_PATH}>
+              <Link
+                to={SETTINGS_PAGE_PATH}
+                css={css`
+                  z-index: 0;
+                  transform: translate(0, 0, 0);
+                  -webkit-transform: translate(0, 0, 0);
+                `}
+              >
                 <Button variant="contained">로그인해주세요</Button>
               </Link>
             )}

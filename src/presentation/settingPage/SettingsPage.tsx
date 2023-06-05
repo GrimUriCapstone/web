@@ -4,7 +4,7 @@ import {
   signInWithGoogle,
   useAuthInitStore,
 } from "@data/stores/authStore";
-import { Button } from "@mui/material";
+import { Button, css } from "@mui/material";
 import { ContentPadding } from "@presentation/common/atomics/PageContent";
 import { LoadingModal } from "@presentation/common/components/LoadingModal";
 import { TopBar } from "@presentation/common/components/TopBar";
@@ -15,7 +15,17 @@ function AuthSetting(): ReactElement {
   const { logout } = useUserRepository();
 
   return (
-    <div>
+    <div
+      css={css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        min-height: 300px;
+      `}
+    >
       {accessToken == null ? (
         <Button
           variant="contained"
